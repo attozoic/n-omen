@@ -6,17 +6,17 @@ import { Grid } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
     height: "100vh",
-    background: "#D3D3D3"
+    background: "#F0F8FF"
   }
 });
 
 export default function Home() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <Grid className={classes.root}>
       <Grid
         container
-        direction="columns"
+        direction="column"
         justify="center"
         alignItems="center"
         style={{ height: "100px" }}
@@ -28,7 +28,7 @@ export default function Home() {
       </Grid>
       <Grid
         container
-        direction="columns"
+        direction="column"
         justify="center"
         alignItems="center"
         style={{ height: "5px" }}
@@ -55,6 +55,6 @@ export default function Home() {
           <p>CONTENT</p>
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }
