@@ -1,37 +1,25 @@
 import React, { FC, useEffect } from "react";
 import createDonutChart from "./createDonutChart";
-import { IoMdFemale, IoMdMale } from "react-icons/io";
 
 interface DisplayGenderProps {
-  gender: string;
-  genderPercentage: number;
+  maleShare: number;
+  femaleShare: number;
 }
 
 const DisplayGender: FC<DisplayGenderProps> = (props) => {
-  const showGenderIcon = (gender: string) => {
-    if (gender === "female") {
-      return <IoMdFemale className="gender-icon" />;
-    } else if (gender === "male") {
-      return <IoMdMale className="gender-icon" />;
+  const generateSvg = () => {
+    if (props.maleShare || props.femaleShare) {
+      return <svg className="donut-svg"></svg>;
     }
   };
 
   useEffect(() => {
-    createDonutChart(props.gender, props.genderPercentage);
+    if (props.maleShare || props.femaleShare) {
+      createDonutChart(props.maleShare, props.femaleShare);
+    }
   });
 
-  if (props.gender) {
-    return (
-      <div>
-        <svg className="donut-svg" width="200" height="200">
-          {showGenderIcon(props.gender)}
-          <g></g>
-        </svg>
-      </div>
-    );
-  } else {
-    return null;
-  }
+  return <div>{generateSvg()}</div>;
 };
 
 export default DisplayGender;
