@@ -2,15 +2,15 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2020: true,
+    es2020: true
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   plugins: ["@typescript-eslint", "react", "prettier"],
   extends: [
@@ -22,20 +22,22 @@ module.exports = {
     "plugin:import/typescript",
     "prettier",
     "prettier/@typescript-eslint",
-    "prettier/react",
+    "prettier/react"
   ],
   rules: {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }],
     "import/extensions": 0,
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": ["error", { custom: "ignore" }],
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", { endOfLine: "auto" }]
   },
   settings: {
     "import/resolver": {
       node: {
-        paths: ["~"],
-      },
-    },
-  },
+        paths: ["~"]
+      }
+    }
+  }
 };
