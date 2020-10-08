@@ -1,7 +1,9 @@
 import * as d3 from "d3";
 
-const createDonutChart = (maleShare: number, femaleShare: number) => {
-  let data = [
+const createDonutChart = (maleShare: number): void => {
+  const femaleShare = 100 - maleShare;
+
+  const data = [
     {
       gender: "male",
       percentage: maleShare
@@ -12,8 +14,8 @@ const createDonutChart = (maleShare: number, femaleShare: number) => {
     }
   ];
 
-  let width = 200;
-  let height = width;
+  const width = 200;
+  const height = width;
 
   const svg = d3
     .select(".donut-svg")
@@ -39,7 +41,7 @@ const createDonutChart = (maleShare: number, femaleShare: number) => {
 
     svg
       .select("text")
-      .text(maleShare + "%")
+      .text(`${maleShare}%`)
       .attr("fill", "lightblue")
       .style("font-size", 26);
   } else if (maleShare < femaleShare) {
@@ -52,15 +54,15 @@ const createDonutChart = (maleShare: number, femaleShare: number) => {
 
     svg
       .select("text")
-      .text(femaleShare + "%")
+      .text(`${femaleShare}%`)
       .attr("fill", "lightpink")
       .style("font-size", 26);
   } else {
     svg.select("text").text("50%").attr("fill", "black").style("font-size", 26);
   }
 
-  let oRadius = 55;
-  let iRadius = 37;
+  const oRadius = 55;
+  const iRadius = 37;
 
   const g = svg
     .append("g")
@@ -68,9 +70,9 @@ const createDonutChart = (maleShare: number, femaleShare: number) => {
 
   const pie = d3
     .pie<{ gender: string; percentage: number }>()
-    .value((data) => data.percentage);
+    .value((d) => d.percentage);
 
-  const path = d3.arc<any>().outerRadius(oRadius).innerRadius(iRadius);
+  const path = d3.arc<unknown>().outerRadius(oRadius).innerRadius(iRadius);
 
   const pies = g
     .selectAll(".arc")
@@ -83,9 +85,9 @@ const createDonutChart = (maleShare: number, femaleShare: number) => {
     .append("path")
     .attr("d", path)
     .data(data)
-    .attr("fill", (data) => {
+    .attr("fill", (d) => {
       let color: string;
-      if (data.gender === "male") {
+      if (d.gender === "male") {
         color = "lightblue";
       } else {
         color = "lightpink";
