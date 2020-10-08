@@ -2,20 +2,21 @@ import React, { FC, useEffect } from "react";
 import createDonutChart from "./createDonutChart";
 
 interface DisplayGenderProps {
-  maleShare: number;
-  femaleShare: number;
+  maleShare: number | null;
 }
 
 const DisplayGender: FC<DisplayGenderProps> = (props) => {
-  const generateSvg = () => {
-    if (props.maleShare || props.femaleShare) {
-      return <svg className="donut-svg"></svg>;
+  const generateSvg = (): JSX.Element => {
+    let svg: JSX.Element;
+    if (props.maleShare != null) {
+      svg = <svg className="donut-svg" />;
     }
+    return svg;
   };
 
   useEffect(() => {
-    if (props.maleShare || props.femaleShare) {
-      createDonutChart(props.maleShare, props.femaleShare);
+    if (props.maleShare != null) {
+      createDonutChart(props.maleShare);
     }
   });
 
