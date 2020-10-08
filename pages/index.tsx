@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Input } from "@material-ui/core";
+import { Button, Input, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -10,7 +9,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const classes = useStyles();
   return (
     <Grid className={classes.root}>
