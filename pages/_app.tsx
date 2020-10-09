@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import React from "react";
 import theme from "../src/theme";
 
-export default function MyApp(props: AppProps): JSX.Element {
+export default function PageInitializer(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
