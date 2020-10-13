@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 import { Typography, withStyles, Divider } from "@material-ui/core";
-import { Country } from "./types";
+import { CountryData } from "./types";
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -9,42 +9,38 @@ const WhiteTextTypography = withStyles({
   }
 })(Typography);
 
-const formatNamePopularity = (percentage: number | null): JSX.Element => {
-  let div: JSX.Element;
-  if (percentage != null) {
-    const fixedPercentage = `${percentage.toFixed(4)}%`;
-    div = <div>{fixedPercentage}</div>;
-  }
-  return div;
-};
+interface CountryInfoProps {
+  countries: CountryData[];
+}
 
-const formatCountryInfo = (country: Country): JSX.Element => {
-  let div: JSX.Element;
-  if (country.countryName != null) {
-    div = (
-      <div>
-        <WhiteTextTypography>{country.countryName}</WhiteTextTypography>
-        <WhiteTextTypography>
-          {formatNamePopularity(country.namePopularity)}
-        </WhiteTextTypography>
-        <Divider />
-      </div>
-    );
-  }
-  return div;
-};
+const CountryInfo: FC<CountryInfoProps> = (props): JSX.Element => {
+  const { countries } = props;
 
-const showCountryInfo = (countries: Country[]): JSX.Element[] => {
-  const div: JSX.Element[] = [];
-  if (countries[0].countryName != null) {
-    for (let i = 0; i < countries.length; i += 1) {
-      if (i === 0) {
-        div.push(<Divider />);
-      }
-      div.push(formatCountryInfo(countries[i]));
+  const createFirstDivider = (index: number): JSX.Element => {
+    let dividerEl: JSX.Element;
+    if (index === 0) {
+      dividerEl = <Divider />;
     }
-  }
-  return div;
+    return dividerEl;
+  };
+
+  return (
+    <div>
+      {countries.map((country, i) => {
+        return (
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={`id-${i}`}>
+            {createFirstDivider(i)}
+            <WhiteTextTypography>{country.countryName}</WhiteTextTypography>
+            <WhiteTextTypography>
+              {`${country.namePopularity.toFixed(4)}%`}
+            </WhiteTextTypography>
+            <Divider />
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
-export default showCountryInfo;
+export default CountryInfo;
