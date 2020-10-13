@@ -1,14 +1,28 @@
 import React, { FC } from "react";
-import showCountryInfo from "./showCountryInfo";
-import { Country } from "./types";
+import CountryInfo from "./CountryInfo";
+import { CountryData } from "./types";
 
-interface DisplayCountriesProps {
-  countries: Country[];
+interface CountryProps {
+  isLoading: boolean;
+  error: Error | null;
+  data: {
+    countries: CountryData[];
+  };
 }
 
-const DisplayCountries: FC<DisplayCountriesProps> = (props) => {
-  const { countries } = props;
-  return <div>{showCountryInfo(countries)}</div>;
+const Country: FC<CountryProps> = (props): JSX.Element => {
+  const { data } = props;
+  const { countries } = data;
+
+  const showCountryInfo = (): JSX.Element => {
+    let countryInfoEl: JSX.Element;
+    if (countries[0].countryName != null) {
+      countryInfoEl = <CountryInfo countries={countries} />;
+    }
+    return countryInfoEl;
+  };
+
+  return <div>{showCountryInfo()}</div>;
 };
 
-export default DisplayCountries;
+export default Country;
