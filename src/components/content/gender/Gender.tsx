@@ -1,11 +1,15 @@
 import React, { FC, useEffect } from "react";
 import createDonutChart from "./createDonutChart";
 
-interface DisplayGenderProps {
-  maleShare: number | null;
+interface GenderProps {
+  isLoading: boolean;
+  error: Error | null;
+  data: {
+    maleShare: number | null;
+  }
 }
 
-const DisplayGender: FC<DisplayGenderProps> = (props) => {
+const Gender: FC<GenderProps> = (props) => {
   const generateSvg = (): JSX.Element => {
     let svg: JSX.Element;
     if (props.maleShare != null) {
@@ -23,4 +27,4 @@ const DisplayGender: FC<DisplayGenderProps> = (props) => {
   return <div>{generateSvg()}</div>;
 };
 
-export default DisplayGender;
+export default Gender;
