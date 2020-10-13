@@ -2,12 +2,28 @@ import React from "react";
 import { Button, Input, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DisplayGender from "../src/components/content/gender/DisplayGender";
-import DisplayCountries from "../src/components/content/countries/DisplayCountries";
+import Country from "../src/components/content/countries/Country";
 
 const useStyles = makeStyles({
   root: {
     height: "100vh",
     background: "#7FFFD4"
+  },
+  input: {
+    textAlign: "center"
+  },
+  inputGrid: {
+    height: "100px"
+  },
+  itemsGrid: {
+    height: "600px"
+  },
+  buttonGrid: {
+    height: "5px"
+  },
+  contentGrid: {
+    background: "#556cd6",
+    textAlign: "center"
   }
 });
 
@@ -20,14 +36,11 @@ export default function Home(): JSX.Element {
         direction="column"
         justify="center"
         alignItems="center"
-        style={{ height: "100px" }}
+        classes={{ root: classes.inputGrid }}
       >
         <Input
           placeholder="Type a name here..."
-          inputProps={{
-            "aria-label": "description",
-            style: { textAlign: "center" }
-          }}
+          classes={{ root: classes.input }}
         />
       </Grid>
       <Grid
@@ -35,7 +48,7 @@ export default function Home(): JSX.Element {
         direction="column"
         justify="center"
         alignItems="center"
-        style={{ height: "5px" }}
+        classes={{ root: classes.buttonGrid }}
       >
         <Button color="primary" variant="contained">
           Button
@@ -47,25 +60,29 @@ export default function Home(): JSX.Element {
         direction="row"
         justify="space-around"
         alignItems="center"
-        style={{ height: "600px" }}
+        classes={{ root: classes.itemsGrid }}
       >
-        <Grid item style={{ backgroundColor: "#556cd6", textAlign: "center" }}>
+        <Grid item classes={{ root: classes.contentGrid }}>
           <DisplayGender maleShare={90} />
-          <DisplayCountries
-            countries={[
-              {
-                countryName: "Serbia",
-                namePopularity: 0.88823
-              },
-              {
-                countryName: "Russia",
-                namePopularity: 0.847328
-              },
-              {
-                countryName: "Belarus",
-                namePopularity: 0.52323
-              }
-            ]}
+          <Country
+            data={{
+              countries: [
+                {
+                  countryName: "Serbia",
+                  namePopularity: 0.88823
+                },
+                {
+                  countryName: "Russia",
+                  namePopularity: 0.847328
+                },
+                {
+                  countryName: "Belarus",
+                  namePopularity: 0.52323
+                }
+              ]
+            }}
+            isLoading={false}
+            error={null}
           />
         </Grid>
         <Grid item>
