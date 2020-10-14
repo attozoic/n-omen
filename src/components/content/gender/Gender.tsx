@@ -6,21 +6,24 @@ interface GenderProps {
   error: Error | null;
   data: {
     maleShare: number | null;
-  }
+  };
 }
 
 const Gender: FC<GenderProps> = (props) => {
+  const { data } = props;
+  const { maleShare } = data;
+
   const generateSvg = (): JSX.Element => {
     let svg: JSX.Element;
-    if (props.maleShare != null) {
+    if (maleShare != null) {
       svg = <svg className="donut-svg" />;
     }
     return svg;
   };
 
   useEffect(() => {
-    if (props.maleShare != null) {
-      createDonutChart(props.maleShare);
+    if (maleShare != null) {
+      createDonutChart(maleShare);
     }
   });
 
