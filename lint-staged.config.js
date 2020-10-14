@@ -1,5 +1,5 @@
 module.exports = {
-  "**/*.(js|md|jsx|tsx|ts|css|sass|less|graphql|yml|yaml|scss|json|vue)": [
+  "**/*.(js|md|jsx|tsx|ts|css)": [
     "eslint --fix",
     "prettier --write"
   ]
