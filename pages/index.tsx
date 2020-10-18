@@ -63,7 +63,7 @@ export default function Home(): JSX.Element {
         classes={{ root: classes.itemsGrid }}
       >
         <Grid item classes={{ root: classes.contentGrid }}>
-          <Gender data={{ maleShare: 90 }} isLoading={false} error={null} />
+          <Gender data={{ maleShare: 80 }} isLoading error={null} />
           <Country
             data={{
               countries: [
