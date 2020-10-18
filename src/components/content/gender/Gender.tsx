@@ -1,5 +1,6 @@
-import React, { FC, useEffect } from "react";
-import createDonutChart from "./createDonutChart";
+import React, { FC } from "react";
+import { LinearProgress } from "@material-ui/core";
+import DonutChart from "./DonutChart";
 
 interface GenderProps {
   isLoading: boolean;
@@ -10,24 +11,17 @@ interface GenderProps {
 }
 
 const Gender: FC<GenderProps> = (props) => {
-  const { data } = props;
-  const { maleShare } = data;
+  const { data, isLoading, error } = props;
 
-  const generateSvg = (): JSX.Element => {
-    let svg: JSX.Element;
-    if (maleShare != null) {
-      svg = <svg className="donut-svg" />;
-    }
-    return svg;
-  };
+  if (isLoading) {
+    return <LinearProgress />;
+  }
 
-  useEffect(() => {
-    if (maleShare != null) {
-      createDonutChart(maleShare);
-    }
-  });
+  if (error != null) {
+    return <div>Error component</div>;
+  }
 
-  return <div>{generateSvg()}</div>;
+  return <DonutChart data={data} />;
 };
 
 export default Gender;
