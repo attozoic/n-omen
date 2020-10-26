@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Input, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DisplayGender from "../src/components/content/gender/DisplayGender";
+import Gender from "../src/components/content/gender/Gender";
 import Country from "../src/components/content/countries/Country";
 
 const useStyles = makeStyles({
@@ -63,7 +63,7 @@ export default function Home(): JSX.Element {
         classes={{ root: classes.itemsGrid }}
       >
         <Grid item classes={{ root: classes.contentGrid }}>
-          <DisplayGender maleShare={90} />
+          <Gender data={{ maleShare: 90 }} isLoading={false} error={null} />
           <Country
             data={{
               countries: [
