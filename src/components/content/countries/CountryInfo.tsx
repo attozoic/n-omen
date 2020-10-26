@@ -29,7 +29,7 @@ const CountryInfo: FC<CountryInfoProps> = (props): JSX.Element => {
       {countries.map((country, i) => {
         return (
           // eslint-disable-next-line react/no-array-index-key
-          <div key={`id-${i}`}>
+          <div data-testid="countryWrapper" key={`id-${i}`}>
             {createFirstDivider(i)}
             <WhiteTextTypography>{country.countryName}</WhiteTextTypography>
             <WhiteTextTypography>
