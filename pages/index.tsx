@@ -3,6 +3,7 @@ import { Button, Input, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Gender from "../src/components/content/gender/Gender";
 import Country from "../src/components/content/countries/Country";
+import MapWrapper from "../src/components/map/MapWrapper";
 
 const useStyles = makeStyles({
   root: {
@@ -85,8 +86,15 @@ export default function Home(): JSX.Element {
             error={null}
           />
         </Grid>
-        <Grid item>
-          <p>MAP</p>
+        <Grid xs={3} item>
+          <MapWrapper
+            isLoading={false}
+            error={null}
+            data={{
+              globeCoords: [0, 0],
+              countryIds: ["RS", "HR"]
+            }}
+          />
         </Grid>
         <Grid item>
           <p>GLOBE</p>
