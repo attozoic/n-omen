@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Input, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Gender from "../src/components/content/gender/Gender";
+import Age from "../src/components/content/age/Age";
 import Country from "../src/components/content/countries/Country";
 
 const useStyles = makeStyles({
@@ -64,6 +65,7 @@ export default function Home(): JSX.Element {
       >
         <Grid item classes={{ root: classes.contentGrid }}>
           <Gender data={{ maleShare: 80 }} isLoading error={null} />
+          <Age data={{ age: 45 }} isLoading error={null} />
           <Country
             data={{
               countries: [
