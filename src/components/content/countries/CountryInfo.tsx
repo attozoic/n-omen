@@ -10,11 +10,14 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 interface CountryInfoProps {
-  countries: CountryData[];
+  data: {
+    countries: CountryData[];
+  };
 }
 
 const CountryInfo: FC<CountryInfoProps> = (props): JSX.Element => {
-  const { countries } = props;
+  const { data } = props;
+  const { countries } = data;
 
   const createFirstDivider = (index: number): JSX.Element => {
     let dividerEl: JSX.Element;
