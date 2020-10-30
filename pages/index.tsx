@@ -81,7 +81,7 @@ export default function Home(): JSX.Element {
                 }
               ]
             }}
-            isLoading={false}
+            isLoading
             error={null}
           />
         </Grid>
