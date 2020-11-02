@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Gender from "../src/components/content/gender/Gender";
 import Country from "../src/components/content/countries/Country";
 import MapWrapper from "../src/components/map/MapWrapper";
+import GlobeWrapper from "../src/components/globe/GlobeWrapper";
 
 const useStyles = makeStyles({
   root: {
@@ -63,8 +64,8 @@ export default function Home(): JSX.Element {
         alignItems="center"
         classes={{ root: classes.itemsGrid }}
       >
-        <Grid item classes={{ root: classes.contentGrid }}>
-          <Gender data={{ maleShare: 80 }} isLoading error={null} />
+        <Grid xs={3} item classes={{ root: classes.contentGrid }}>
+          <Gender data={{ maleShare: 80 }} isLoading={false} error={null} />
           <Country
             data={{
               countries: [
@@ -96,8 +97,15 @@ export default function Home(): JSX.Element {
             }}
           />
         </Grid>
-        <Grid item>
-          <p>GLOBE</p>
+        <Grid xs={3} item>
+          <GlobeWrapper
+            isLoading={false}
+            error={null}
+            data={{
+              mapCoords: [0, 0],
+              countryIds: ["RS", "HR"]
+            }}
+          />
         </Grid>
       </Grid>
     </Grid>
