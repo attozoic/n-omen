@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, LinearProgress } from "@material-ui/core";
 
 interface AgeProps {
   isLoading: boolean;
@@ -10,8 +10,17 @@ interface AgeProps {
 }
 
 const Age: FC<AgeProps> = (props): JSX.Element => {
-  const { data } = props;
+  const { data, isLoading, error } = props;
   const { age } = data;
+
+  if (isLoading) {
+    return <LinearProgress />;
+  }
+
+  if (error != null) {
+    return <div>Error component</div>;
+  }
+
   return <Typography>{age}</Typography>;
 };
 
