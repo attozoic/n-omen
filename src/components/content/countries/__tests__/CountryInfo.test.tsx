@@ -3,14 +3,16 @@ import { shallow } from "enzyme";
 import CountryInfo from "../CountryInfo";
 import { CountryData } from "../types";
 
-const setup = (propsOverride?: { countries: CountryData[] }) => {
+const setup = (propsOverride?: { data: { countries: CountryData[] } }) => {
   const props = {
-    countries: [
-      {
-        countryName: "Serbia",
-        namePopularity: 0.88823
-      }
-    ],
+    data: {
+      countries: [
+        {
+          countryName: "Serbia",
+          namePopularity: 0.88823
+        }
+      ]
+    },
     ...propsOverride
   };
 
@@ -38,7 +40,7 @@ describe("CountryInfo component", () => {
           namePopularity: 0.98382
         }
       ];
-      const { wrapper, countryWrapper } = setup({ countries });
+      const { wrapper, countryWrapper } = setup({ data: { countries } });
       expect(wrapper.find({ children: "Serbia" }).exists()).toBe(true);
       expect(wrapper.find({ children: "Russia" }).exists()).toBe(true);
       expect(countryWrapper.length).toBe(countries.length);

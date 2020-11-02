@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { LinearProgress } from "@material-ui/core";
 import CountryInfo from "./CountryInfo";
 import { CountryData } from "./types";
 
@@ -11,18 +12,17 @@ interface CountryProps {
 }
 
 const Country: FC<CountryProps> = (props): JSX.Element => {
-  const { data } = props;
-  const { countries } = data;
+  const { data, isLoading, error } = props;
 
-  const showCountryInfo = (): JSX.Element => {
-    let countryInfoEl: JSX.Element;
-    if (countries[0].countryName != null) {
-      countryInfoEl = <CountryInfo countries={countries} />;
-    }
-    return countryInfoEl;
-  };
+  if (isLoading) {
+    return <LinearProgress />;
+  }
 
-  return <div>{showCountryInfo()}</div>;
+  if (error != null) {
+    return <div>Error component</div>;
+  }
+
+  return <CountryInfo data={data} />;
 };
 
 export default Country;
