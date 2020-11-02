@@ -2,6 +2,7 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import "leaflet/dist/leaflet.css";
 import React from "react";
 import theme from "../src/theme";
 
