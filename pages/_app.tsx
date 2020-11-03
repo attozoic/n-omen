@@ -4,10 +4,14 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import "leaflet/dist/leaflet.css";
 import React from "react";
+import { ConnectedRouter } from "connected-react-router";
+import { History } from "history";
 import theme from "../src/theme";
 
-export default function PageInitializer(props: AppProps): JSX.Element {
-  const { Component, pageProps } = props;
+export default function PageInitializer(
+  props: AppProps & { history: History }
+): JSX.Element {
+  const { Component, pageProps, history } = props;
 
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -24,10 +28,12 @@ export default function PageInitializer(props: AppProps): JSX.Element {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ConnectedRouter history={history}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ConnectedRouter>
     </>
   );
 }

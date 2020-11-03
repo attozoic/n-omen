@@ -1,5 +1,11 @@
 export const UPDATE_INFO = "UPDATE_INFO";
 
+export interface ContentState {
+  isBusy: boolean;
+  error: Error;
+  nameInfo: NameInfo;
+}
+
 export interface NameInfo {
   name: string;
   age: number;

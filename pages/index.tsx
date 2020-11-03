@@ -7,7 +7,9 @@ import Age from "../src/components/content/age/Age";
 import Country from "../src/components/content/countries/Country";
 import MapWrapper from "../src/components/map/MapWrapper";
 import GlobeWrapper from "../src/components/globe/GlobeWrapper";
-import store from "../src/redux/store/store";
+import configureStore from "../src/state/store";
+
+const { store } = configureStore;
 
 const useStyles = makeStyles({
   root: {
