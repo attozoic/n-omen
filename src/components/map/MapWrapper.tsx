@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { LinearProgress } from "@material-ui/core";
-import WorldMap from "./WorldMap";
+import React, { FC } from 'react';
+import { LinearProgress } from '@material-ui/core';
+import WorldMap from './WorldMap';
 
 interface MapWrapperProps {
   isLoading: boolean | null;

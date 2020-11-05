@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { LinearProgress } from "@material-ui/core";
-import Globe from "./Globe";
+import React, { FC } from 'react';
+import { LinearProgress } from '@material-ui/core';
+import Globe from './Globe';
 
 interface GlobeWrapperProps {
   isLoading: boolean | null;

@@ -3,7 +3,7 @@ import {
   UPDATE_MAP_COORDS,
   CoordsType,
   Coords
-} from "./types";
+} from './types';
 
 const defaultState: Coords = {
   globeCoords: [0, 0],

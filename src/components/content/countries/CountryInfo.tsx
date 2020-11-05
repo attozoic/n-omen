@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { Typography, withStyles, Divider } from "@material-ui/core";
-import { CountryData } from "./types";
+import React, { FC } from 'react';
+import { Typography, withStyles, Divider } from '@material-ui/core';
+import { CountryData } from './types';
 
 const WhiteTextTypography = withStyles({
   root: {
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontSize: 20
   }
 })(Typography);

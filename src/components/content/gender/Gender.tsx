@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { LinearProgress } from "@material-ui/core";
-import DonutChart from "./DonutChart";
+import React, { FC } from 'react';
+import { LinearProgress } from '@material-ui/core';
+import DonutChart from './DonutChart';
 
 interface GenderProps {
   isLoading: boolean;

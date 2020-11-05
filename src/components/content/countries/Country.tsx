@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { LinearProgress } from "@material-ui/core";
-import CountryInfo from "./CountryInfo";
-import { CountryData } from "./types";
+import React, { FC } from 'react';
+import { LinearProgress } from '@material-ui/core';
+import CountryInfo from './CountryInfo';
+import { CountryData } from './types';
 
 interface CountryProps {
   isLoading: boolean;

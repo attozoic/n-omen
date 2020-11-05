@@ -1,5 +1,5 @@
-import content from "../components/content/state/initialState";
-import { ContentState } from "../components/content/state/types";
+import content from '../components/content/state/initialState';
+import { ContentState } from '../components/content/state/types';
 
 export type AppState = {
   content: ContentState;

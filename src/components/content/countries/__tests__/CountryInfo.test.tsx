@@ -1,14 +1,14 @@
-import React from "react";
-import { shallow } from "enzyme";
-import CountryInfo from "../CountryInfo";
-import { CountryData } from "../types";
+import React from 'react';
+import { shallow } from 'enzyme';
+import CountryInfo from '../CountryInfo';
+import { CountryData } from '../types';
 
 const setup = (propsOverride?: { data: { countries: CountryData[] } }) => {
   const props = {
     data: {
       countries: [
         {
-          countryName: "Serbia",
+          countryName: 'Serbia',
           namePopularity: 0.88823
         }
       ]
@@ -17,32 +17,32 @@ const setup = (propsOverride?: { data: { countries: CountryData[] } }) => {
   };
 
   const wrapper = shallow(<CountryInfo {...props} />);
-  const countryWrapper = wrapper.find({ "data-testid": "countryWrapper" });
+  const countryWrapper = wrapper.find({ 'data-testid': 'countryWrapper' });
 
   return { wrapper, countryWrapper };
 };
 
-describe("CountryInfo component", () => {
-  it("should render", () => {
+describe('CountryInfo component', () => {
+  it('should render', () => {
     const { wrapper } = setup();
     expect(wrapper.exists()).toBe(true);
   });
 
-  describe("recieves array of countries", () => {
-    it("should render all countries from an array", () => {
+  describe('recieves array of countries', () => {
+    it('should render all countries from an array', () => {
       const countries = [
         {
-          countryName: "Serbia",
+          countryName: 'Serbia',
           namePopularity: 0.88823
         },
         {
-          countryName: "Russia",
+          countryName: 'Russia',
           namePopularity: 0.98382
         }
       ];
       const { wrapper, countryWrapper } = setup({ data: { countries } });
-      expect(wrapper.find({ children: "Serbia" }).exists()).toBe(true);
-      expect(wrapper.find({ children: "Russia" }).exists()).toBe(true);
+      expect(wrapper.find({ children: 'Serbia' }).exists()).toBe(true);
+      expect(wrapper.find({ children: 'Russia' }).exists()).toBe(true);
       expect(countryWrapper.length).toBe(countries.length);
     });
   });
