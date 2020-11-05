@@ -1,13 +1,8 @@
-import { all, put, takeEvery } from "redux-saga/effects";
-import getNameInfoApi from "../../../data/api";
-import {
-  getNameInfo,
-  getNameInfoFail,
-  getNameInfoSuccess,
-  GET_NAME_INFO
-} from "./actions";
+import { all, put, takeEvery } from 'redux-saga/effects';
+import getNameInfoApi from '../../../data/api';
+import { getNameInfoFail, getNameInfoSuccess, GET_NAME_INFO } from './actions';
 
-export function* getNameInfo$(action: ReturnType<typeof getNameInfo>) {
+export function* getNameInfo$(): Generator {
   try {
     const response = yield getNameInfoApi();
 
@@ -17,6 +12,6 @@ export function* getNameInfo$(action: ReturnType<typeof getNameInfo>) {
   }
 }
 
-export default function* () {
+export default function* content(): Generator {
   yield all([takeEvery(GET_NAME_INFO, getNameInfo$)]);
 }
