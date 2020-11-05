@@ -1,36 +1,26 @@
-import React from "react";
-import { Button, Input, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Provider } from "react-redux";
-import Gender from "../src/components/content/gender/Gender";
-import Age from "../src/components/content/age/Age";
-import Country from "../src/components/content/countries/Country";
-import MapWrapper from "../src/components/map/MapWrapper";
-import GlobeWrapper from "../src/components/globe/GlobeWrapper";
-import configureStore from "../src/state/store";
-
-const { store } = configureStore;
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Provider } from 'react-redux';
+import Gender from '../src/components/content/gender/Gender';
+import Age from '../src/components/content/age/Age';
+import Country from '../src/components/content/countries/Country';
+import MapWrapper from '../src/components/map/MapWrapper';
+import GlobeWrapper from '../src/components/globe/GlobeWrapper';
+import store from '../src/state/store';
+import Search from '../src/components/search/Search';
 
 const useStyles = makeStyles({
   root: {
-    height: "100vh",
-    background: "#7FFFD4"
-  },
-  input: {
-    textAlign: "center"
-  },
-  inputGrid: {
-    height: "100px"
+    height: '100vh',
+    background: '#7FFFD4'
   },
   itemsGrid: {
-    height: "600px"
-  },
-  buttonGrid: {
-    height: "5px"
+    height: '600px'
   },
   contentGrid: {
-    background: "#556cd6",
-    textAlign: "center"
+    background: '#556cd6',
+    textAlign: 'center'
   }
 });
 
@@ -39,29 +29,7 @@ export default function Home(): JSX.Element {
   return (
     <Provider store={store}>
       <Grid className={classes.root}>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          classes={{ root: classes.inputGrid }}
-        >
-          <Input
-            placeholder="Type a name here..."
-            classes={{ root: classes.input }}
-          />
-        </Grid>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          classes={{ root: classes.buttonGrid }}
-        >
-          <Button color="primary" variant="contained">
-            Button
-          </Button>
-        </Grid>
+        <Search />
 
         <Grid
           container
@@ -72,20 +40,20 @@ export default function Home(): JSX.Element {
         >
           <Grid xs={3} item classes={{ root: classes.contentGrid }}>
             <Gender data={{ maleShare: 80 }} isLoading error={null} />
-            <Age data={{ age: 45 }} isLoading error={null} />
+            <Age />
             <Country
               data={{
                 countries: [
                   {
-                    countryName: "Serbia",
+                    countryName: 'Serbia',
                     namePopularity: 0.88823
                   },
                   {
-                    countryName: "Russia",
+                    countryName: 'Russia',
                     namePopularity: 0.847328
                   },
                   {
-                    countryName: "Belarus",
+                    countryName: 'Belarus',
                     namePopularity: 0.52323
                   }
                 ]
@@ -100,7 +68,7 @@ export default function Home(): JSX.Element {
               error={null}
               data={{
                 globeCoords: [0, 0],
-                countryIds: ["RS", "HR"]
+                countryIds: ['RS', 'HR']
               }}
             />
           </Grid>
@@ -110,7 +78,7 @@ export default function Home(): JSX.Element {
               error={null}
               data={{
                 mapCoords: [0, 0],
-                countryIds: ["RS", "HR"]
+                countryIds: ['RS', 'HR']
               }}
             />
           </Grid>
