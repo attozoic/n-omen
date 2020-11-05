@@ -1,7 +1,7 @@
-import { ContentState, NameInfo } from "./types";
+import { ContentState } from './types';
 
 const initialState: ContentState = {
-  isBusy: true,
+  isLoading: true,
   error: null,
   nameInfo: {
     name: null,
