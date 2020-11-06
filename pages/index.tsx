@@ -3,13 +3,12 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import Gender from '../src/components/content/gender/Gender';
-// eslint-disable-next-line import/no-named-as-default
-import Age from '../src/components/content/age/Age';
 import Country from '../src/components/content/countries/Country';
 import MapWrapper from '../src/components/map/MapWrapper';
 import GlobeWrapper from '../src/components/globe/GlobeWrapper';
 import store from '../src/state/store';
 import Search from '../src/components/search/Search';
+import AgeContainer from '../src/components/content/age/AgeContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +40,7 @@ export default function Home(): JSX.Element {
         >
           <Grid xs={3} item classes={{ root: classes.contentGrid }}>
             <Gender data={{ maleShare: 80 }} isLoading error={null} />
-            <Age />
+            <AgeContainer />
             <Country
               data={{
                 countries: [
