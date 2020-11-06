@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { Typography, LinearProgress } from '@material-ui/core';
-import { ContentState } from '../state/types';
+import { AppState } from '../../../state/initialState';
 
 interface AgeProps {
   isLoading: boolean;
@@ -11,7 +11,7 @@ interface AgeProps {
   };
 }
 
-const Age: FC<AgeProps> = (props): JSX.Element => {
+export const Age: FC<AgeProps> = (props): JSX.Element => {
   const { data, isLoading, error } = props;
   const { age } = data;
 
@@ -26,7 +26,7 @@ const Age: FC<AgeProps> = (props): JSX.Element => {
   return <Typography>{age}</Typography>;
 };
 
-const mapStateToProps = (state: { content: ContentState }) => {
+export const mapStateToProps = (state: AppState): AgeProps => {
   return {
     data: {
       age: state.content.nameInfo.age
