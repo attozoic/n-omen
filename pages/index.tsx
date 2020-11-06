@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import Gender from '../src/components/content/gender/Gender';
+// eslint-disable-next-line import/no-named-as-default
 import Age from '../src/components/content/age/Age';
 import Country from '../src/components/content/countries/Country';
 import MapWrapper from '../src/components/map/MapWrapper';
