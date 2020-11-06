@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LinearProgress, Typography } from '@material-ui/core';
-import { Age, mapStateToProps } from '../Age';
+import { mapStateToProps } from '../AgeContainer';
+import Age from '../Age';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
