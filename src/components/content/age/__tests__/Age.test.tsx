@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LinearProgress, Typography } from '@material-ui/core';
-import Age from '../Age';
+import { Age, mapStateToProps } from '../Age';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
@@ -57,6 +57,29 @@ describe('Age component', () => {
       expect(loadingComponent.exists()).toBe(false);
       expect(ageComponent.exists()).toBe(true);
       expect(errorComponent.exists()).toBe(false);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return correct data', () => {
+      const initialState = {
+        content: {
+          isLoading: true,
+          error: null,
+          nameInfo: {
+            name: null,
+            age: 22,
+            gender: null,
+            countries: [],
+            countryIds: [],
+            namePopularity: []
+          }
+        }
+      };
+
+      expect(mapStateToProps(initialState).isLoading).toBe(true);
+      expect(mapStateToProps(initialState).error).toBe(null);
+      expect(mapStateToProps(initialState).data.age).toBe(22);
     });
   });
 });
