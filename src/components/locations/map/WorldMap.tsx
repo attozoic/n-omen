@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Feature } from 'geojson';
 import { Map, GeoJSON, TileLayer } from 'react-leaflet-universal';
-import countries from '../../data/geo.json';
+import countries from '../../../data/geo.json';
 
 interface MapProps {
   data: {

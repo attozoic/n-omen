@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import Gender from '../src/components/content/gender/Gender';
 import Country from '../src/components/content/countries/Country';
-import MapWrapper from '../src/components/map/MapWrapper';
+import MapWrapper from '../src/components/locations/map/MapWrapper';
 import GlobeWrapper from '../src/components/locations/globe/GlobeWrapper';
 import store from '../src/state/store';
 import Search from '../src/components/search/Search';
