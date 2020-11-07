@@ -1,8 +1,8 @@
-import React from "react";
-import { shallow } from "enzyme";
-import { LinearProgress } from "@material-ui/core";
-import DonutChart from "../DonutChart";
-import Gender from "../Gender";
+import React from 'react';
+import { shallow } from 'enzyme';
+import { LinearProgress } from '@material-ui/core';
+import DonutChart from '../DonutChart';
+import Gender from '../Gender';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
@@ -17,7 +17,7 @@ const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const wrapper = shallow(<Gender {...props} />);
   const donutChartComponent = wrapper.find(DonutChart);
   const loadingComponent = wrapper.find(LinearProgress);
-  const errorComponent = wrapper.find({ children: "Error component" });
+  const errorComponent = wrapper.find({ children: 'Error component' });
 
   return {
     wrapper,
@@ -27,9 +27,9 @@ const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   };
 };
 
-describe("Gender component", () => {
-  describe("isLoading is true", () => {
-    it("should render only loading indicator", () => {
+describe('Gender component', () => {
+  describe('isLoading is true', () => {
+    it('should render only loading indicator', () => {
       const { loadingComponent, donutChartComponent, errorComponent } = setup();
       expect(loadingComponent.exists()).toBe(true);
       expect(donutChartComponent.exists()).toBe(false);
@@ -37,11 +37,11 @@ describe("Gender component", () => {
     });
   });
 
-  describe("isLoading is false and there is an error", () => {
-    it("should render only error component", () => {
+  describe('isLoading is false and there is an error', () => {
+    it('should render only error component', () => {
       const { loadingComponent, donutChartComponent, errorComponent } = setup({
         isLoading: false,
-        error: Error("Error found")
+        error: Error('Error found')
       });
       expect(errorComponent.exists()).toBe(true);
       expect(loadingComponent.exists()).toBe(false);
@@ -49,8 +49,8 @@ describe("Gender component", () => {
     });
   });
 
-  describe("isLoading is false and there is no error", () => {
-    it("should render only CountryInfo component", () => {
+  describe('isLoading is false and there is no error', () => {
+    it('should render only CountryInfo component', () => {
       const { loadingComponent, donutChartComponent, errorComponent } = setup({
         isLoading: false,
         error: null

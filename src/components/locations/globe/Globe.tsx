@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from "react";
-import * as d3 from "d3";
-import json from "../../data/geo.json";
+import React, { FC, useEffect } from 'react';
+import * as d3 from 'd3';
+import json from '../../../data/geo.json';
 
 interface GlobeProps {
   data: {
@@ -26,33 +26,33 @@ const Globe: FC<GlobeProps> = (props) => {
       .rotate([mapCoords[1], mapCoords[0]]);
 
     const path = d3.geoPath().projection(projection);
-    const svg = d3.select("#svgDiv").attr("width", w).attr("height", h);
-    svg.selectAll("*").remove();
-    const map = svg.append("g");
+    const svg = d3.select('#svgDiv').attr('width', w).attr('height', h);
+    svg.selectAll('*').remove();
+    const map = svg.append('g');
 
     map
-      .append("path")
-      .datum({ type: "Sphere" })
-      .attr("d", path)
-      .attr("fill", "#101820ff");
+      .append('path')
+      .datum({ type: 'Sphere' })
+      .attr('d', path)
+      .attr('fill', '#101820ff');
 
     map
-      .selectAll(".country")
+      .selectAll('.country')
       .data(json.features)
-      .join("path")
-      .attr("class", "country")
-      .attr("fill", (d) => {
+      .join('path')
+      .attr('class', 'country')
+      .attr('fill', (d) => {
         switch (d.properties.iso_a2) {
           case countryIds[0]:
           case countryIds[1]:
           case countryIds[2]:
-            return "white";
+            return 'white';
           default:
-            return "#f3b059";
+            return '#f3b059';
         }
       });
 
-    map.selectAll(".country").attr("d", path).attr("stroke", "black");
+    map.selectAll('.country').attr('d', path).attr('stroke', 'black');
 
     const dragged = (event: { dx: number; dy: number }) => {
       const rotate = projection.rotate();
@@ -62,10 +62,10 @@ const Globe: FC<GlobeProps> = (props) => {
       lat = lat > 89 ? 89 : lat;
       lat = lat < -89 ? -89 : lat;
       projection.rotate([lng, lat]);
-      map.selectAll("path").attr("d", path);
+      map.selectAll('path').attr('d', path);
     };
 
-    const drag = d3.drag().on("drag", dragged);
+    const drag = d3.drag().on('drag', dragged);
     svg.call(drag);
   };
 

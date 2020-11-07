@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { Typography, LinearProgress } from "@material-ui/core";
+import React, { FC } from 'react';
+import { Typography, LinearProgress } from '@material-ui/core';
 
-interface AgeProps {
+export interface AgeProps {
   isLoading: boolean;
   error: Error | null;
   data: {

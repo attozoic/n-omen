@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { Feature } from "geojson";
-import { Map, GeoJSON, TileLayer } from "react-leaflet-universal";
-import countries from "../../data/geo.json";
+import React, { FC } from 'react';
+import { Feature } from 'geojson';
+import { Map, GeoJSON, TileLayer } from 'react-leaflet-universal';
+import countries from '../../../data/geo.json';
 
 interface MapProps {
   data: {
@@ -15,9 +15,9 @@ const WorldMap: FC<MapProps> = (props) => {
   const { countryIds, globeCoords } = data;
 
   const countryStyle = {
-    fillColor: "#101820ff",
+    fillColor: '#101820ff',
     fillOpacity: 0.5,
-    color: "blue",
+    color: 'blue',
     weight: 1
   };
 
@@ -39,7 +39,7 @@ const WorldMap: FC<MapProps> = (props) => {
         default:
           return {
             fillOpacity: 0,
-            color: "",
+            color: '',
             weight: 0
           };
       }
