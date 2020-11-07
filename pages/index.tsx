@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import Gender from '../src/components/content/gender/Gender';
 import Country from '../src/components/content/countries/Country';
 import MapWrapper from '../src/components/map/MapWrapper';
-import GlobeWrapper from '../src/components/globe/GlobeWrapper';
+import GlobeWrapper from '../src/components/locations/globe/GlobeWrapper';
 import store from '../src/state/store';
 import Search from '../src/components/search/Search';
 import AgeContainer from '../src/components/content/age/AgeContainer';

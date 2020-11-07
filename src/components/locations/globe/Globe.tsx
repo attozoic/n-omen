@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import * as d3 from 'd3';
-import json from '../../data/geo.json';
+import json from '../../../data/geo.json';
 
 interface GlobeProps {
   data: {
