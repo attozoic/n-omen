@@ -9,10 +9,11 @@ export interface AgeProps {
   };
 }
 
-const Age: FC<AgeProps> = (props): JSX.Element => {
-  const { data, isLoading, error } = props;
-  const { age } = data;
-
+const Age: FC<AgeProps> = ({
+  data: { age },
+  isLoading,
+  error
+}): JSX.Element => {
   if (isLoading) {
     return <LinearProgress />;
   }

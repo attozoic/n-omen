@@ -6,9 +6,10 @@ import 'leaflet/dist/leaflet.css';
 import React from 'react';
 import theme from '../src/theme';
 
-export default function PageInitializer(props: AppProps): JSX.Element {
-  const { Component, pageProps } = props;
-
+export default function PageInitializer({
+  Component,
+  pageProps
+}: AppProps): JSX.Element {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {

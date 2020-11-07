@@ -2,14 +2,22 @@ import { connect } from 'react-redux';
 import { AppState } from '../../../state/initialState';
 import Age, { AgeProps } from './Age';
 
-export const mapStateToProps = (state: AppState): AgeProps => {
+export const mapStateToProps = ({
+  content: {
+    nameInfo: { age },
+    error,
+    isLoading
+  }
+}: AppState): AgeProps => {
   return {
     data: {
-      age: state.content.nameInfo.age
+      age
     },
-    isLoading: state.content.isLoading,
-    error: state.content.error
+    isLoading,
+    error
   };
 };
 
-export default connect(mapStateToProps)(Age);
+const AgeContainer = connect(mapStateToProps)(Age);
+
+export default AgeContainer;
