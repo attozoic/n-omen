@@ -15,10 +15,9 @@ interface CountryInfoProps {
   };
 }
 
-const CountryInfo: FC<CountryInfoProps> = (props): JSX.Element => {
-  const { data } = props;
-  const { countries } = data;
-
+const CountryInfo: FC<CountryInfoProps> = ({
+  data: { countries }
+}): JSX.Element => {
   const createFirstDivider = (index: number): JSX.Element => {
     let dividerEl: JSX.Element;
     if (index === 0) {
