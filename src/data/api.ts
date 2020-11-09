@@ -3,9 +3,8 @@ import { NameInfo } from '../components/content/state/types';
 export default async (): Promise<NameInfo> =>
   Promise.resolve({
     age: 44,
-    countries: ['RS', 'HR', 'DE'],
+    countries: [{ countryName: 'Serbia', namePopularity: 0.08787 }],
     countryIds: ['RS', 'HR', 'DE'],
-    gender: 'male',
-    name: 'John',
-    namePopularity: []
+    maleShare: 22,
+    name: 'John'
   });
