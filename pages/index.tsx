@@ -2,13 +2,13 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
-import Gender from '../src/components/content/gender/Gender';
-import Country from '../src/components/content/countries/Country';
+import CountryContiner from '../src/components/content/countries/CountryContainer';
 import MapWrapper from '../src/components/map/MapWrapper';
 import GlobeWrapper from '../src/components/globe/GlobeWrapper';
 import store from '../src/state/store';
 import Search from '../src/components/search/Search';
 import AgeContainer from '../src/components/content/age/AgeContainer';
+import GenderContainer from '../src/components/content/gender/GenderContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -39,28 +39,9 @@ export default function Home(): JSX.Element {
           classes={{ root: classes.itemsGrid }}
         >
           <Grid xs={3} item classes={{ root: classes.contentGrid }}>
-            <Gender data={{ maleShare: 80 }} isLoading error={null} />
+            <GenderContainer />
             <AgeContainer />
-            <Country
-              data={{
-                countries: [
-                  {
-                    countryName: 'Serbia',
-                    namePopularity: 0.88823
-                  },
-                  {
-                    countryName: 'Russia',
-                    namePopularity: 0.847328
-                  },
-                  {
-                    countryName: 'Belarus',
-                    namePopularity: 0.52323
-                  }
-                ]
-              }}
-              isLoading
-              error={null}
-            />
+            <CountryContiner />
           </Grid>
           <Grid xs={3} item>
             <MapWrapper
