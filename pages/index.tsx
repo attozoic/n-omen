@@ -6,9 +6,9 @@ import CountryContiner from '../src/components/content/countries/CountryContaine
 import MapWrapper from '../src/components/map/MapWrapper';
 import GlobeWrapper from '../src/components/globe/GlobeWrapper';
 import store from '../src/state/store';
-import Search from '../src/components/search/Search';
 import AgeContainer from '../src/components/content/age/AgeContainer';
 import GenderContainer from '../src/components/content/gender/GenderContainer';
+import SearchContainer from '../src/components/search/SearchContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
   return (
     <Provider store={store}>
       <Grid className={classes.root}>
-        <Search />
+        <SearchContainer />
 
         <Grid
           container
