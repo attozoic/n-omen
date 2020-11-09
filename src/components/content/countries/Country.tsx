@@ -3,7 +3,7 @@ import { LinearProgress } from '@material-ui/core';
 import CountryInfo from './CountryInfo';
 import { CountryData } from './types';
 
-interface CountryProps {
+export interface CountryProps {
   isLoading: boolean;
   error: Error | null;
   data: {
@@ -11,9 +11,7 @@ interface CountryProps {
   };
 }
 
-const Country: FC<CountryProps> = (props): JSX.Element => {
-  const { data, isLoading, error } = props;
-
+const Country: FC<CountryProps> = ({ data, error, isLoading }): JSX.Element => {
   if (isLoading) {
     return <LinearProgress />;
   }
