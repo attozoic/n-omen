@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import { LinearProgress } from '@material-ui/core';
 import CountryInfo from '../CountryInfo';
 import Country from '../Country';
+import { mapStateToProps } from '../CountryContainer';
+import initialState from '../../../../state/initialState';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
@@ -62,6 +64,38 @@ describe('Country component', () => {
       expect(countryInfoComponent.exists()).toBe(true);
       expect(errorComponent.exists()).toBe(false);
       expect(loadingComponent.exists()).toBe(false);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return correct data', () => {
+      const testInitialState = {
+        ...initialState,
+        content: {
+          isLoading: true,
+          error: null,
+          nameInfo: {
+            name: null,
+            age: null,
+            maleShare: null,
+            countries: [
+              { countryName: 'Serbia', namePopularity: 0.01313 },
+              { countryName: 'Serbia', namePopularity: 0.01313 }
+            ],
+            countryIds: []
+          }
+        }
+      };
+
+      expect(mapStateToProps(testInitialState).isLoading).toBe(true);
+      expect(mapStateToProps(testInitialState).error).toBe(null);
+      expect(mapStateToProps(testInitialState).data.countries.length).toBe(2);
+      expect(
+        mapStateToProps(testInitialState).data.countries[0].countryName
+      ).toBe('Serbia');
+      expect(
+        mapStateToProps(testInitialState).data.countries[0].namePopularity
+      ).toBe(0.01313);
     });
   });
 });
