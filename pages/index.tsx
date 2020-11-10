@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import Gender from '../src/components/content/gender/Gender';
 import Country from '../src/components/content/countries/Country';
-import MapWrapper from '../src/components/locations/map/MapWrapper';
-import GlobeWrapper from '../src/components/locations/globe/GlobeWrapper';
+import MapContainer from '../src/components/locations/map/MapContainer';
+import GlobeContainer from '../src/components/locations/globe/GlobeContainer';
 import store from '../src/state/store';
 import Search from '../src/components/search/Search';
 import AgeContainer from '../src/components/content/age/AgeContainer';
@@ -63,24 +63,10 @@ export default function Home(): JSX.Element {
             />
           </Grid>
           <Grid xs={3} item>
-            <MapWrapper
-              isLoading
-              error={null}
-              data={{
-                globeCoords: [0, 0],
-                countryIds: ['RS', 'HR']
-              }}
-            />
+            <MapContainer />
           </Grid>
           <Grid xs={3} item>
-            <GlobeWrapper
-              isLoading
-              error={null}
-              data={{
-                mapCoords: [0, 0],
-                countryIds: ['RS', 'HR']
-              }}
-            />
+            <GlobeContainer />
           </Grid>
         </Grid>
       </Grid>

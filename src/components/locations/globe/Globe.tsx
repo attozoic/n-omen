@@ -1,18 +1,20 @@
 import React, { FC, useEffect } from 'react';
 import * as d3 from 'd3';
+import { PayloadAction } from 'typesafe-actions';
 import json from '../../../data/geo.json';
 
 interface GlobeProps {
   data: {
     countryIds: string[] | null;
-    mapCoords: number[];
+    coords: number[];
   };
+  updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
-const Globe: FC<GlobeProps> = (props) => {
-  const { data } = props;
-  const { countryIds, mapCoords } = data;
-
+const Globe: FC<GlobeProps> = ({
+  data: { countryIds, coords },
+  updateCoords
+}) => {
   const createGlobe = () => {
     const w = 475;
     const h = 475;
@@ -23,7 +25,7 @@ const Globe: FC<GlobeProps> = (props) => {
       .geoOrthographic()
       .scale(scl)
       .translate([w / 2, h / 2])
-      .rotate([mapCoords[1], mapCoords[0]]);
+      .rotate([-coords[1], -coords[0]]);
 
     const path = d3.geoPath().projection(projection);
     const svg = d3.select('#svgDiv').attr('width', w).attr('height', h);
@@ -63,6 +65,7 @@ const Globe: FC<GlobeProps> = (props) => {
       lat = lat < -89 ? -89 : lat;
       projection.rotate([lng, lat]);
       map.selectAll('path').attr('d', path);
+      updateCoords([-lat, -lng]);
     };
 
     const drag = d3.drag().on('drag', dragged);

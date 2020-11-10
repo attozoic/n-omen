@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { Feature } from 'geojson';
 import { Map, GeoJSON, TileLayer } from 'react-leaflet-universal';
+import { PayloadAction } from 'typesafe-actions';
 import countries from '../../../data/geo.json';
 
 interface MapProps {
   data: {
     countryIds: string[] | null;
-    globeCoords: number[];
+    coords: number[];
   };
+  updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
-const WorldMap: FC<MapProps> = (props) => {
-  const { data } = props;
-  const { countryIds, globeCoords } = data;
-
+const WorldMap: FC<MapProps> = ({
+  data: { countryIds, coords },
+  updateCoords
+}) => {
   const countryStyle = {
     fillColor: '#101820ff',
     fillOpacity: 0.5,
@@ -46,6 +48,14 @@ const WorldMap: FC<MapProps> = (props) => {
     };
   };
 
+  const onMoveUpdateCoords = (event: {
+    target: { getCenter: () => { lat: number; lng: number } };
+  }) => {
+    const center = event.target.getCenter();
+    const centerCoords = [center.lat, center.lng];
+    updateCoords(centerCoords);
+  };
+
   return (
     <Map
       css={`
@@ -53,12 +63,13 @@ const WorldMap: FC<MapProps> = (props) => {
         width: 100%;
         z-index: 0;
       `}
-      center={[-globeCoords[1], -globeCoords[0]]}
+      center={[coords[0], coords[1]]}
       zoom={3}
       minZoom={2}
       maxZoom={5}
       worldCopyJump="true"
       style={{ height: 500, width: 500 }}
+      ondrag={onMoveUpdateCoords}
     >
       <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" />
 

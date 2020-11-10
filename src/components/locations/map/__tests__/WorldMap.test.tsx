@@ -1,13 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import WorldMap from '../WorldMap';
+import { updateCoords } from '../../state/actions';
 
 const setup = () => {
   const props = {
     data: {
       countryIds: ['RS', 'HR'],
-      globeCoords: [0, 0]
-    }
+      coords: [0, 0]
+    },
+    updateCoords
   };
 
   const wrapper = shallow(<WorldMap {...props} />);

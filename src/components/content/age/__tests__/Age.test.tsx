@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { LinearProgress, Typography } from '@material-ui/core';
 import { mapStateToProps } from '../AgeContainer';
 import Age from '../Age';
+import initialState from '../../../../state/initialState';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
@@ -63,7 +64,8 @@ describe('Age component', () => {
 
   describe('mapStateToProps', () => {
     it('should return correct data', () => {
-      const initialState = {
+      const testInitialState = {
+        ...initialState,
         content: {
           isLoading: true,
           error: null,
@@ -78,9 +80,9 @@ describe('Age component', () => {
         }
       };
 
-      expect(mapStateToProps(initialState).isLoading).toBe(true);
-      expect(mapStateToProps(initialState).error).toBe(null);
-      expect(mapStateToProps(initialState).data.age).toBe(22);
+      expect(mapStateToProps(testInitialState).isLoading).toBe(true);
+      expect(mapStateToProps(testInitialState).error).toBe(null);
+      expect(mapStateToProps(testInitialState).data.age).toBe(22);
     });
   });
 });
