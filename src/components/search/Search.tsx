@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
 import { Button, Input, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { GET_NAME_INFO } from '../../state/actions';
 
 const useStyles = makeStyles({
   input: {
@@ -16,13 +14,12 @@ const useStyles = makeStyles({
   }
 });
 
-interface SearchProps {
-  getNameInfo: () => { type: string };
+export interface SearchProps {
+  getNameInfo: () => void;
 }
 
-const Search: FC<SearchProps> = (props): JSX.Element => {
+const Search: FC<SearchProps> = ({ getNameInfo }): JSX.Element => {
   const classes = useStyles();
-  const { getNameInfo } = props;
   return (
     <div>
       <Grid
@@ -52,10 +49,4 @@ const Search: FC<SearchProps> = (props): JSX.Element => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getNameInfo: () => dispatch({ type: GET_NAME_INFO })
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Search);
+export default Search;

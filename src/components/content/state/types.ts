@@ -1,3 +1,5 @@
+import { CountryData } from '../countries/types';
+
 export interface ContentState {
   isLoading: boolean;
   error: Error;
@@ -7,8 +9,7 @@ export interface ContentState {
 export interface NameInfo {
   name: string;
   age: number;
-  gender: string;
-  countries: string[];
+  maleShare: number;
+  countries: CountryData[];
   countryIds: string[];
-  namePopularity: string[];
 }

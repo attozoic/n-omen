@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import { LinearProgress } from '@material-ui/core';
 import DonutChart from '../DonutChart';
 import Gender from '../Gender';
+import { mapStateToProps } from '../GenderContainer';
+import initialState from '../../../../state/initialState';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
@@ -50,7 +52,7 @@ describe('Gender component', () => {
   });
 
   describe('isLoading is false and there is no error', () => {
-    it('should render only CountryInfo component', () => {
+    it('should render only DonutChart component', () => {
       const { loadingComponent, donutChartComponent, errorComponent } = setup({
         isLoading: false,
         error: null
@@ -58,6 +60,29 @@ describe('Gender component', () => {
       expect(donutChartComponent.exists()).toBe(true);
       expect(errorComponent.exists()).toBe(false);
       expect(loadingComponent.exists()).toBe(false);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return correct data', () => {
+      const testInitialState = {
+        ...initialState,
+        content: {
+          isLoading: true,
+          error: null,
+          nameInfo: {
+            name: null,
+            age: null,
+            maleShare: 56,
+            countries: [],
+            countryIds: []
+          }
+        }
+      };
+
+      expect(mapStateToProps(testInitialState).isLoading).toBe(true);
+      expect(mapStateToProps(testInitialState).error).toBe(null);
+      expect(mapStateToProps(testInitialState).data.maleShare).toBe(56);
     });
   });
 });

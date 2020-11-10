@@ -7,9 +7,9 @@ interface DonutChartProps {
   };
 }
 
-const DonutChart: FC<DonutChartProps> = (props): JSX.Element => {
-  const { data } = props;
-  const { maleShare } = data;
+const DonutChart: FC<DonutChartProps> = ({
+  data: { maleShare }
+}): JSX.Element => {
   const femaleShare = 100 - maleShare;
 
   const createDonutChart = () => {

@@ -6,10 +6,9 @@ const initialState: ContentState = {
   nameInfo: {
     name: null,
     age: null,
-    gender: null,
+    maleShare: null,
     countries: [],
-    countryIds: [],
-    namePopularity: []
+    countryIds: []
   }
 };
 
