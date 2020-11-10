@@ -77,9 +77,8 @@ describe('GlobeWrapper component', () => {
             countryIds: ['RS', 'HR'],
             name: null,
             age: 22,
-            gender: null,
-            countries: [],
-            namePopularity: []
+            maleShare: null,
+            countries: []
           }
         },
         locations: {
