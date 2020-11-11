@@ -1,10 +1,14 @@
+import axios from 'axios';
+import formatData from './formatData';
 import { NameInfo } from '../components/content/state/types';
 
-export default async (): Promise<NameInfo> =>
-  Promise.resolve({
-    age: 44,
-    countries: [{ countryName: 'Serbia', namePopularity: 0.08787 }],
-    countryIds: ['RS', 'HR', 'DE'],
-    maleShare: 22,
-    name: 'John'
-  });
+export default async function request(): Promise<NameInfo> {
+  const input = document.getElementById('search-input').value;
+  const agify = await axios.get(`https://api.agify.io?name=${input}`);
+  const nationalize = await axios.get(
+    `https://api.nationalize.io?name=${input}`
+  );
+  const genderize = await axios.get(`https://api.genderize.io?name=${input}`);
+
+  return formatData(agify.data, nationalize.data, genderize.data);
+}
