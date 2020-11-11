@@ -16,10 +16,10 @@ const Globe: FC<GlobeProps> = ({
   updateCoords
 }) => {
   const createGlobe = () => {
-    const w = 475;
-    const h = 475;
+    const w = 120;
+    const h = 120;
     const sensitivity = 75;
-    const scl = 590 / 2.5;
+    const scl = 150 / 2.5;
 
     const projection = d3
       .geoOrthographic()
