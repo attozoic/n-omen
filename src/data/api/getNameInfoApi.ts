@@ -1,6 +1,6 @@
 import axios from 'axios';
 import formatData from './formatData';
-import { NameInfo } from '../components/content/state/types';
+import { NameInfo } from '../../components/content/state/types';
 
 export default async function getNameInfoApi(): Promise<NameInfo> {
   const input = document.getElementById('search-input').value;

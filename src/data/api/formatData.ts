@@ -1,7 +1,7 @@
-import { NameInfo } from '../components/content/state/types';
+import { NameInfo } from '../../components/content/state/types';
 import { Genderize, Agify, Nationalize } from './types';
-import jsonData from './geo.json';
-import { CountryData } from '../components/content/countries/types';
+import jsonData from '../geo.json';
+import { CountryData } from '../../components/content/countries/types';
 
 const getFullCountryNames = (idArr: string[]) => {
   const jsonArr = jsonData.features;
