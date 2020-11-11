@@ -58,17 +58,12 @@ const WorldMap: FC<MapProps> = ({
 
   return (
     <Map
-      css={`
-        height: 100%;
-        width: 100%;
-        z-index: 0;
-      `}
       center={[coords[0], coords[1]]}
       zoom={3}
       minZoom={2}
       maxZoom={5}
       worldCopyJump="true"
-      style={{ height: 500, width: 500 }}
+      style={{ height: 600 }}
       ondrag={onMoveUpdateCoords}
     >
       <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" />
