@@ -2,7 +2,7 @@ import axios from 'axios';
 import formatData from './formatData';
 import { NameInfo } from '../components/content/state/types';
 
-export default async function request(): Promise<NameInfo> {
+export default async function getNameInfoApi(): Promise<NameInfo> {
   const input = document.getElementById('search-input').value;
   const agify = await axios.get(`https://api.agify.io?name=${input}`);
   const nationalize = await axios.get(
