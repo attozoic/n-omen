@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Typography, withStyles, Divider } from '@material-ui/core';
 import { CountryData } from './types';
 
-const WhiteTextTypography = withStyles({
+const TextTypography = withStyles({
   root: {
-    color: '#FFFFFF',
+    color: '#1769aa',
     fontSize: 20
   }
 })(Typography);
@@ -33,10 +33,10 @@ const CountryInfo: FC<CountryInfoProps> = ({
           // eslint-disable-next-line react/no-array-index-key
           <div data-testid="countryWrapper" key={`id-${i}`}>
             {createFirstDivider(i)}
-            <WhiteTextTypography>{country.countryName}</WhiteTextTypography>
-            <WhiteTextTypography>
+            <TextTypography>{country.countryName}</TextTypography>
+            <TextTypography>
               {`${country.namePopularity.toFixed(4)}%`}
-            </WhiteTextTypography>
+            </TextTypography>
             <Divider />
           </div>
         );
