@@ -32,6 +32,7 @@ const Search: FC<SearchProps> = ({ getNameInfo }): JSX.Element => {
         <Input
           placeholder="Type a name here..."
           classes={{ root: classes.input }}
+          id="search-input"
         />
       </Grid>
       <Grid
