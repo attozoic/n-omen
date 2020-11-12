@@ -9,6 +9,7 @@ import store from '../src/state/store';
 import AgeContainer from '../src/components/content/age/AgeContainer';
 import GenderContainer from '../src/components/content/gender/GenderContainer';
 import SearchContainer from '../src/components/search/SearchContainer';
+import NameContainer from '../src/components/content/name/NameContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
     background: '#7FFFD4'
   },
   mapGrid: {
-    height: '630px'
+    height: '624px'
   },
   countryGrid: {
     color: '#1769aa',
@@ -50,6 +51,7 @@ export default function Home(): JSX.Element {
           justify-content="center"
         >
           <Grid xs={2} item classes={{ root: classes.ageGrid }}>
+            <NameContainer />
             <AgeContainer />
           </Grid>
           <Grid xs={2} item classes={{ root: classes.genderGrid }}>
