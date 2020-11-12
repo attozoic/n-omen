@@ -7,15 +7,11 @@ import countries from '../../../data/geo.json';
 interface MapProps {
   data: {
     countryIds: string[] | null;
-    coords: number[];
   };
   updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
-const WorldMap: FC<MapProps> = ({
-  data: { countryIds, coords },
-  updateCoords
-}) => {
+const WorldMap: FC<MapProps> = ({ data: { countryIds }, updateCoords }) => {
   const countryStyle = {
     fillColor: '#101820ff',
     fillOpacity: 0.5,
@@ -58,7 +54,7 @@ const WorldMap: FC<MapProps> = ({
 
   return (
     <Map
-      center={[coords[0], coords[1]]}
+      center={[0, 0]}
       zoom={3}
       minZoom={2}
       maxZoom={5}

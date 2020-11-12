@@ -8,7 +8,6 @@ export interface MapWrapperStateProps {
   error: Error | null;
   data: {
     countryIds: string[] | null;
-    coords: number[];
   };
 }
 

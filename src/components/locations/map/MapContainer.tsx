@@ -12,12 +12,10 @@ export const mapStateToProps = ({
     nameInfo: { countryIds },
     isLoading,
     error
-  },
-  locations: { coords }
+  }
 }: AppState): MapWrapperStateProps => {
   return {
     data: {
-      coords,
       countryIds
     },
     isLoading,
