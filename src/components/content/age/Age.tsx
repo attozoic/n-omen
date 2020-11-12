@@ -25,11 +25,8 @@ const Age: FC<AgeProps> = ({
   return (
     <div>
       <Divider />
-      <Typography variant="h5" color="primary">
-        Age:
-      </Typography>
       <Typography variant="h4" color="primary">
-        {age}
+        Age: {age}
       </Typography>
       <Divider />;
     </div>
