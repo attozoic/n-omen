@@ -24,7 +24,7 @@ const DonutChart: FC<DonutChartProps> = ({
       }
     ];
 
-    const width = 200;
+    const width = 180;
     const height = width;
 
     const svg = d3
@@ -38,41 +38,41 @@ const DonutChart: FC<DonutChartProps> = ({
       .append('text')
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
-      .attr('font-family', 'sans-serif')
-      .attr('transform', `translate(${width / 2}, ${height / 2})`);
+      .attr('font-family', 'sans-serif');
 
     if (maleShare > femaleShare) {
       svg
         .append('svg:image')
         .attr('xlink:href', '/male-sign.svg')
         .attr('width', 180)
-        .attr('height', 180)
-        .attr('transform', 'translate(22, 0)');
+        .attr('height', 180);
 
       svg
         .select('text')
         .text(`${maleShare}%`)
         .attr('fill', 'lightblue')
-        .style('font-size', 26);
+        .style('font-size', 26)
+        .attr('transform', `translate(${width / 2 - 10}, ${height / 2 + 13})`);
     } else if (maleShare < femaleShare) {
       svg
         .append('svg:image')
         .attr('xlink:href', '/female-sign.svg')
         .attr('width', 180)
-        .attr('height', 180)
-        .attr('transform', 'translate(10, 33)');
+        .attr('height', 180);
 
       svg
         .select('text')
         .text(`${femaleShare}%`)
         .attr('fill', 'lightpink')
-        .style('font-size', 26);
+        .style('font-size', 26)
+        .attr('transform', `translate(${width / 2}, ${height / 2 - 20})`);
     } else {
       svg
         .select('text')
         .text('50%')
         .attr('fill', 'black')
-        .style('font-size', 26);
+        .style('font-size', 26)
+        .attr('transform', `translate(${width / 2}, ${height / 2})`);
     }
 
     const oRadius = 55;
@@ -107,6 +107,16 @@ const DonutChart: FC<DonutChartProps> = ({
           color = 'lightpink';
         }
         return color;
+      })
+      .attr('transform', () => {
+        let translate = 'translate(0, 0)';
+        if (femaleShare > maleShare) {
+          translate = 'translate(0, -20)';
+        }
+        if (maleShare > femaleShare) {
+          translate = 'translate(-10, 13)';
+        }
+        return translate;
       });
   };
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, LinearProgress } from '@material-ui/core';
+import { Typography, LinearProgress, Divider } from '@material-ui/core';
 
 export interface AgeProps {
   isLoading: boolean;
@@ -22,7 +22,15 @@ const Age: FC<AgeProps> = ({
     return <div>Error component</div>;
   }
 
-  return <Typography>{age}</Typography>;
+  return (
+    <div>
+      <Divider />
+      <Typography variant="h4" color="primary">
+        Age: {age}
+      </Typography>
+      <Divider />;
+    </div>
+  );
 };
 
 export default Age;

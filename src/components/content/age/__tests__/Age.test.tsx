@@ -72,10 +72,9 @@ describe('Age component', () => {
           nameInfo: {
             name: null,
             age: 22,
-            gender: null,
+            maleShare: null,
             countries: [],
-            countryIds: [],
-            namePopularity: []
+            countryIds: []
           }
         }
       };

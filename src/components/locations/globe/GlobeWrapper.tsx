@@ -1,29 +1,16 @@
 import React, { FC } from 'react';
 import { LinearProgress } from '@material-ui/core';
-import { PayloadAction } from 'typesafe-actions';
 import Globe from './Globe';
 
-export interface GlobeWrapperStateProps {
+export interface GlobeWrapperProps {
   isLoading: boolean | null;
   error: Error | null;
   data: {
-    countryIds: string[] | null;
     coords: number[];
   };
 }
 
-export interface GlobeWrapperDispatchProps {
-  updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
-}
-
-type GlobeWrapperProps = GlobeWrapperStateProps & GlobeWrapperDispatchProps;
-
-const GlobeWrapper: FC<GlobeWrapperProps> = ({
-  data,
-  isLoading,
-  error,
-  updateCoords
-}) => {
+const GlobeWrapper: FC<GlobeWrapperProps> = ({ data, isLoading, error }) => {
   if (isLoading) {
     return <LinearProgress />;
   }
@@ -32,7 +19,7 @@ const GlobeWrapper: FC<GlobeWrapperProps> = ({
     return <div>Error component</div>;
   }
 
-  return <Globe data={data} updateCoords={updateCoords} />;
+  return <Globe data={data} />;
 };
 
 export default GlobeWrapper;

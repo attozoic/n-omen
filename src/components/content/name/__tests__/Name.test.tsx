@@ -1,65 +1,64 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { LinearProgress } from '@material-ui/core';
-import GlobeWrapper from '../GlobeWrapper';
-import Globe from '../Globe';
-import { mapStateToProps } from '../GlobeContainer';
+import { LinearProgress, Typography } from '@material-ui/core';
+import { mapStateToProps } from '../NameContainer';
+import Name from '../Name';
 import initialState from '../../../../state/initialState';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
     data: {
-      coords: [0, 0]
+      name: 'John'
     },
     isLoading: true,
     error: null,
     ...propOverrides
   };
 
-  const wrapper = shallow(<GlobeWrapper {...props} />);
-  const globeComponent = wrapper.find(Globe);
+  const wrapper = shallow(<Name {...props} />);
+  const nameComponent = wrapper.find(Typography);
   const loadingComponent = wrapper.find(LinearProgress);
   const errorComponent = wrapper.find({ children: 'Error component' });
 
   return {
     wrapper,
-    globeComponent,
+    nameComponent,
     loadingComponent,
     errorComponent
   };
 };
 
-describe('GlobeWrapper component', () => {
+describe('Name component', () => {
   describe('isLoading is true', () => {
     it('should render only loading indicator', () => {
-      const { loadingComponent, globeComponent, errorComponent } = setup();
+      const { loadingComponent, nameComponent, errorComponent } = setup();
       expect(loadingComponent.exists()).toBe(true);
-      expect(globeComponent.exists()).toBe(false);
+      expect(nameComponent.exists()).toBe(false);
       expect(errorComponent.exists()).toBe(false);
     });
   });
 
   describe('isLoading is false and there is an error', () => {
     it('should render only error component', () => {
-      const { loadingComponent, globeComponent, errorComponent } = setup({
+      const { loadingComponent, nameComponent, errorComponent } = setup({
         isLoading: false,
         error: Error('Error found')
       });
-      expect(errorComponent.exists()).toBe(true);
       expect(loadingComponent.exists()).toBe(false);
-      expect(globeComponent.exists()).toBe(false);
+      expect(nameComponent.exists()).toBe(false);
+      expect(errorComponent.exists()).toBe(true);
     });
   });
 
   describe('isLoading is false and there is no error', () => {
-    it('should render only globe component', () => {
-      const { loadingComponent, globeComponent, errorComponent } = setup({
+    it('should render only name component', () => {
+      const { loadingComponent, nameComponent, errorComponent } = setup({
         isLoading: false,
         error: null
       });
-      expect(globeComponent.exists()).toBe(true);
-      expect(errorComponent.exists()).toBe(false);
       expect(loadingComponent.exists()).toBe(false);
+      expect(nameComponent.exists()).toBe(true);
+      expect(errorComponent.exists()).toBe(false);
     });
   });
 
@@ -71,24 +70,18 @@ describe('GlobeWrapper component', () => {
           isLoading: true,
           error: null,
           nameInfo: {
-            countryIds: ['RS', 'HR'],
-            name: null,
-            age: 22,
+            name: 'John',
+            age: null,
             maleShare: null,
-            countries: []
+            countries: [],
+            countryIds: []
           }
-        },
-        locations: {
-          coords: [25, 25]
         }
       };
 
       expect(mapStateToProps(testInitialState).isLoading).toBe(true);
       expect(mapStateToProps(testInitialState).error).toBe(null);
-      expect(mapStateToProps(testInitialState).data.coords).toStrictEqual([
-        25,
-        25
-      ]);
+      expect(mapStateToProps(testInitialState).data.name).toBe('John');
     });
   });
 });
