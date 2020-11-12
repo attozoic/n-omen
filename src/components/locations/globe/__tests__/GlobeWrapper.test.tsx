@@ -3,19 +3,16 @@ import { shallow } from 'enzyme';
 import { LinearProgress } from '@material-ui/core';
 import GlobeWrapper from '../GlobeWrapper';
 import Globe from '../Globe';
-import { updateCoords } from '../../state/actions';
-import { mapStateToProps, mapDispatchToProps } from '../GlobeContainer';
+import { mapStateToProps } from '../GlobeContainer';
 import initialState from '../../../../state/initialState';
 
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
     data: {
-      countryIds: ['RS', 'HR'],
       coords: [0, 0]
     },
     isLoading: true,
     error: null,
-    updateCoords,
     ...propOverrides
   };
 
@@ -92,22 +89,6 @@ describe('GlobeWrapper component', () => {
         25,
         25
       ]);
-      expect(mapStateToProps(testInitialState).data.countryIds).toStrictEqual([
-        'RS',
-        'HR'
-      ]);
-    });
-  });
-
-  describe('mapDispatchToProps', () => {
-    it('should dispatch UPDATE_COORDS action with given payload', () => {
-      const dispatch = jest.fn();
-
-      mapDispatchToProps(dispatch).updateCoords([25, 25]);
-      expect(dispatch.mock.calls[0][0]).toEqual({
-        type: 'UPDATE_COORDS',
-        payload: [25, 25]
-      });
     });
   });
 });

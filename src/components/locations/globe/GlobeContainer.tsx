@@ -1,40 +1,19 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { AppState } from '../../../state/initialState';
-import GlobeWrapper, {
-  GlobeWrapperStateProps,
-  GlobeWrapperDispatchProps
-} from './GlobeWrapper';
-import { updateCoords } from '../state/actions';
+import GlobeWrapper, { GlobeWrapperProps } from './GlobeWrapper';
 
 export const mapStateToProps = ({
-  content: {
-    nameInfo: { countryIds },
-    isLoading,
-    error
-  },
+  content: { isLoading, error },
   locations: { coords }
-}: AppState): GlobeWrapperStateProps => {
+}: AppState): GlobeWrapperProps => {
   return {
     data: {
-      coords,
-      countryIds
+      coords
     },
     isLoading,
     error
   };
 };
 
-export const mapDispatchToProps = (
-  dispatch: Dispatch
-): GlobeWrapperDispatchProps => {
-  return {
-    updateCoords: (coords: number[]) => dispatch(updateCoords(coords))
-  };
-};
-
-const GlobeContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GlobeWrapper);
+const GlobeContainer = connect(mapStateToProps)(GlobeWrapper);
 export default GlobeContainer;
