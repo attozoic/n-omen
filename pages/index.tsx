@@ -32,6 +32,9 @@ const useStyles = makeStyles({
     marginTop: '40px',
     textAlign: 'center',
     height: '200px'
+  },
+  globeGrid: {
+    pointerEvents: 'none'
   }
 });
 
@@ -72,7 +75,7 @@ export default function Home(): JSX.Element {
                 <MapContainer />
               </Container>
             </Grid>
-            <Grid>
+            <Grid classes={{ root: classes.globeGrid }}>
               <Box position="absolute" zIndex="tooltip" right="2%" top="2%">
                 <GlobeContainer />
               </Box>
