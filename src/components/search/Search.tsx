@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 export interface SearchProps {
   getNameInfo: () => void;
+  toggleMobileOpen: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,8 +23,21 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1
     },
+    appBar: {
+      minHeight: '56px',
+      justifyContent: 'center',
+      [theme.breakpoints.up('xs')]: {
+        height: '56px'
+      },
+      [theme.breakpoints.up('sm')]: {
+        height: '64px'
+      }
+    },
     menuButton: {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('sm')]: {
+        display: 'none'
+      }
     },
     title: {
       flexGrow: 1,
@@ -60,7 +74,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -74,7 +87,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Search: FC<SearchProps> = ({ getNameInfo }): JSX.Element => {
+const Search: FC<SearchProps> = ({
+  getNameInfo,
+  toggleMobileOpen
+}): JSX.Element => {
   const classes = useStyles();
 
   const handleKeyDown = (event: { key: string }) => {
@@ -85,13 +101,14 @@ const Search: FC<SearchProps> = ({ getNameInfo }): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" id="search-app-bar" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={toggleMobileOpen}
           >
             <MenuIcon />
           </IconButton>
