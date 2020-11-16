@@ -2,6 +2,7 @@ import { CountryData } from '../countries/types';
 
 export interface ContentState {
   isLoading: boolean;
+  mobileOpen: boolean;
   error: Error;
   nameInfo: NameInfo;
 }
