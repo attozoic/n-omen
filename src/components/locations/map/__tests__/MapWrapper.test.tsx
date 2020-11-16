@@ -72,6 +72,7 @@ describe('MapWrapper component', () => {
         content: {
           isLoading: true,
           error: null,
+          mobileOpen: false,
           nameInfo: {
             countryIds: ['RS', 'HR'],
             name: null,
