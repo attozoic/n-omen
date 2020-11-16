@@ -10,9 +10,9 @@ interface GlobeProps {
 
 const Globe: FC<GlobeProps> = ({ data: { coords } }) => {
   const createGlobe = () => {
-    const w = 120;
-    const h = 120;
-    const scl = 150 / 2.5;
+    const w = 110;
+    const h = w;
+    const scl = w / 2;
 
     const projection = d3
       .geoOrthographic()
@@ -46,7 +46,7 @@ const Globe: FC<GlobeProps> = ({ data: { coords } }) => {
     createGlobe();
   });
 
-  return <svg id="svgDiv" style={{ pointerEvents: 'none' }} />;
+  return <svg id="svgDiv" />;
 };
 
 export default Globe;

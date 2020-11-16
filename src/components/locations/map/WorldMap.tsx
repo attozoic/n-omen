@@ -59,7 +59,10 @@ const WorldMap: FC<MapProps> = ({ data: { countryIds }, updateCoords }) => {
       minZoom={2}
       maxZoom={5}
       worldCopyJump="true"
-      style={{ height: 600 }}
+      style={{
+        height: '100%',
+        width: '100%'
+      }}
       ondrag={onMoveUpdateCoords}
     >
       <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" />
