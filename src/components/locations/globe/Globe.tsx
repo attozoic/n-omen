@@ -44,7 +44,7 @@ const Globe: FC<GlobeProps> = ({ data: { coords } }) => {
 
   useEffect(() => {
     createGlobe();
-  });
+  }, [coords]);
 
   return <svg id="svgDiv" />;
 };
