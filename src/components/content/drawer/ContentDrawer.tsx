@@ -22,12 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       position: 'relative'
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none'
-      }
-    },
     drawerPaper: {
       [theme.breakpoints.up('xs')]: {
         width: drawerWidth,
@@ -86,7 +80,7 @@ const ContentDrawer: FC<ContentDrawerProps> = ({
             paper: classes.drawerPaper
           }}
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true
           }}
         >
           {drawer}
