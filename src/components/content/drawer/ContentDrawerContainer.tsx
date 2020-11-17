@@ -2,8 +2,11 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Drawer from './ContentDrawer';
 import { TOGGLE_MOBILE_OPEN } from '../state/actions';
+import { AppState } from '../../../state/initialState';
 
-const mapStateToProps = ({ content: { mobileOpen } }) => {
+export const mapStateToProps = ({
+  content: { mobileOpen }
+}: AppState): { mobileOpen: boolean } => {
   return {
     mobileOpen
   };
