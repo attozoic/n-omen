@@ -72,17 +72,13 @@ describe('Country component', () => {
       const testInitialState = {
         ...initialState,
         content: {
-          isLoading: true,
-          error: null,
+          ...initialState.content,
           nameInfo: {
-            name: null,
-            age: null,
-            maleShare: null,
+            ...initialState.content.nameInfo,
             countries: [
               { countryName: 'Serbia', namePopularity: 0.01313 },
               { countryName: 'Serbia', namePopularity: 0.01313 }
-            ],
-            countryIds: []
+            ]
           }
         }
       };

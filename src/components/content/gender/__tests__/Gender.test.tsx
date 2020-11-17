@@ -68,14 +68,10 @@ describe('Gender component', () => {
       const testInitialState = {
         ...initialState,
         content: {
-          isLoading: true,
-          error: null,
+          ...initialState.content,
           nameInfo: {
-            name: null,
-            age: null,
-            maleShare: 56,
-            countries: [],
-            countryIds: []
+            ...initialState.content.nameInfo,
+            maleShare: 56
           }
         }
       };

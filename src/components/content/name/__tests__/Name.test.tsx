@@ -67,14 +67,10 @@ describe('Name component', () => {
       const testInitialState = {
         ...initialState,
         content: {
-          isLoading: true,
-          error: null,
+          ...initialState.content,
           nameInfo: {
-            name: 'John',
-            age: null,
-            maleShare: null,
-            countries: [],
-            countryIds: []
+            ...initialState.content.nameInfo,
+            name: 'John'
           }
         }
       };
