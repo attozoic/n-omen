@@ -2,7 +2,8 @@ import { createReducer } from 'typesafe-actions';
 import {
   GET_NAME_INFO_FAIL,
   GET_NAME_INFO_SUCCESS,
-  GET_NAME_INFO
+  GET_NAME_INFO,
+  TOGGLE_MOBILE_OPEN
 } from './actions';
 import initialState from './initialState';
 
@@ -11,6 +12,10 @@ export default createReducer(initialState, {
     ...state,
     isLoading: true,
     error: null
+  }),
+  [TOGGLE_MOBILE_OPEN]: (state) => ({
+    ...state,
+    mobileOpen: !state.mobileOpen
   }),
   [GET_NAME_INFO_FAIL]: (state, payload) => ({
     ...state,

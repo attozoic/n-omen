@@ -67,17 +67,6 @@ describe('GlobeWrapper component', () => {
     it('should return correct data', () => {
       const testInitialState = {
         ...initialState,
-        content: {
-          isLoading: true,
-          error: null,
-          nameInfo: {
-            countryIds: ['RS', 'HR'],
-            name: null,
-            age: 22,
-            maleShare: null,
-            countries: []
-          }
-        },
         locations: {
           coords: [25, 25]
         }

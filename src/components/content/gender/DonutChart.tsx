@@ -28,7 +28,7 @@ const DonutChart: FC<DonutChartProps> = ({
     const height = width;
 
     const svg = d3
-      .select('.donut-svg')
+      .selectAll('.donut-svg')
       .attr('width', width)
       .attr('height', height);
 
@@ -121,10 +121,8 @@ const DonutChart: FC<DonutChartProps> = ({
   };
 
   useEffect(() => {
-    if (maleShare != null) {
-      createDonutChart();
-    }
-  });
+    createDonutChart();
+  }, [maleShare]);
 
   return <svg className="donut-svg" />;
 };

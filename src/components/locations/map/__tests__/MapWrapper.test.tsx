@@ -10,8 +10,7 @@ import initialState from '../../../../state/initialState';
 const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   const props = {
     data: {
-      countryIds: ['RS', 'HR'],
-      coords: [0, 0]
+      countryIds: ['RS', 'HR']
     },
     isLoading: true,
     error: null,
@@ -73,6 +72,7 @@ describe('MapWrapper component', () => {
         content: {
           isLoading: true,
           error: null,
+          mobileOpen: false,
           nameInfo: {
             countryIds: ['RS', 'HR'],
             name: null,
@@ -80,18 +80,11 @@ describe('MapWrapper component', () => {
             maleShare: null,
             countries: []
           }
-        },
-        locations: {
-          coords: [25, 25]
         }
       };
 
       expect(mapStateToProps(testInitialState).isLoading).toBe(true);
       expect(mapStateToProps(testInitialState).error).toBe(null);
-      expect(mapStateToProps(testInitialState).data.coords).toStrictEqual([
-        25,
-        25
-      ]);
       expect(mapStateToProps(testInitialState).data.countryIds).toStrictEqual([
         'RS',
         'HR'

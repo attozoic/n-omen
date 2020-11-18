@@ -2,6 +2,7 @@ import { ContentState } from './types';
 
 const initialState: ContentState = {
   isLoading: true,
+  mobileOpen: false,
   error: null,
   nameInfo: {
     name: null,
