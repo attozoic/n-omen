@@ -24,7 +24,7 @@ const DonutChart: FC<DonutChartProps> = ({
       }
     ];
 
-    const width = 180;
+    const width = 140;
     const height = width;
 
     const svg = d3
@@ -44,27 +44,27 @@ const DonutChart: FC<DonutChartProps> = ({
       svg
         .append('svg:image')
         .attr('xlink:href', '/male-sign.svg')
-        .attr('width', 180)
-        .attr('height', 180);
+        .attr('width', width)
+        .attr('height', height);
 
       svg
         .select('text')
         .text(`${maleShare}%`)
         .attr('fill', 'lightblue')
-        .style('font-size', 26)
-        .attr('transform', `translate(${width / 2 - 10}, ${height / 2 + 13})`);
+        .style('font-size', 20)
+        .attr('transform', `translate(${width / 2 - 10}, ${height / 2 + 9})`);
     } else if (maleShare < femaleShare) {
       svg
         .append('svg:image')
         .attr('xlink:href', '/female-sign.svg')
-        .attr('width', 180)
-        .attr('height', 180);
+        .attr('width', width)
+        .attr('height', height);
 
       svg
         .select('text')
         .text(`${femaleShare}%`)
         .attr('fill', 'lightpink')
-        .style('font-size', 26)
+        .style('font-size', 20)
         .attr('transform', `translate(${width / 2}, ${height / 2 - 20})`);
     } else {
       svg
@@ -75,8 +75,8 @@ const DonutChart: FC<DonutChartProps> = ({
         .attr('transform', `translate(${width / 2}, ${height / 2})`);
     }
 
-    const oRadius = 55;
-    const iRadius = 37;
+    const oRadius = 43;
+    const iRadius = 28;
 
     const g = svg
       .append('g')
@@ -111,10 +111,10 @@ const DonutChart: FC<DonutChartProps> = ({
       .attr('transform', () => {
         let translate = 'translate(0, 0)';
         if (femaleShare > maleShare) {
-          translate = 'translate(0, -20)';
+          translate = 'translate(0, -19)';
         }
         if (maleShare > femaleShare) {
-          translate = 'translate(-10, 13)';
+          translate = 'translate(-9, 9)';
         }
         return translate;
       });

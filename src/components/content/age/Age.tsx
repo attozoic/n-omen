@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, LinearProgress } from '@material-ui/core';
+import { Typography, LinearProgress, withStyles } from '@material-ui/core';
 
 export interface AgeProps {
   isLoading: boolean;
@@ -8,6 +8,27 @@ export interface AgeProps {
     age: number | null;
   };
 }
+
+const TextTypography = withStyles({
+  root: {
+    color: '#556cd6',
+    fontSize: 25,
+    textAlign: 'center',
+    width: 210,
+    borderBottom: '1px solid',
+    backgroundColor: '#fff'
+  }
+})(Typography);
+
+const InfoTypography = withStyles({
+  root: {
+    color: '#556cd6',
+    fontSize: 8,
+    textAlign: 'center',
+    marginTop: 10,
+    backgroundColor: '#fff'
+  }
+})(Typography);
 
 const Age: FC<AgeProps> = ({
   data: { age },
@@ -24,9 +45,10 @@ const Age: FC<AgeProps> = ({
 
   return (
     <div>
-      <Typography variant="h4" color="primary">
-        Age: {age}
-      </Typography>
+      <InfoTypography>AVERAGE AGE</InfoTypography>
+      <TextTypography variant="h4" color="primary">
+        {age}
+      </TextTypography>
     </div>
   );
 };

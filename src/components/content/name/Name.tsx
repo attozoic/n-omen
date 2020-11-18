@@ -1,4 +1,4 @@
-import { LinearProgress, Typography, Divider } from '@material-ui/core';
+import { LinearProgress, Typography, withStyles } from '@material-ui/core';
 import React, { FC } from 'react';
 
 export interface NameProps {
@@ -8,6 +8,18 @@ export interface NameProps {
     name: string;
   };
 }
+
+const TextTypography = withStyles({
+  root: {
+    color: '#fff',
+    fontSize: 30,
+    textAlign: 'center',
+    width: 240,
+    height: 40,
+    borderBottom: '1px solid',
+    backgroundColor: '#4456ab'
+  }
+})(Typography);
 
 const Name: FC<NameProps> = ({
   data: { name },
@@ -21,10 +33,9 @@ const Name: FC<NameProps> = ({
   }
   return (
     <div>
-      <Divider />
-      <Typography variant="h3" color="primary">
+      <TextTypography variant="h3" color="primary">
         {name}
-      </Typography>
+      </TextTypography>
     </div>
   );
 };

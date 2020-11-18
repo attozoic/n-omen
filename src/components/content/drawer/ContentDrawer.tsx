@@ -26,12 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('xs')]: {
         width: drawerWidth,
         height: 'calc(100% - 56px)',
-        top: '56px'
+        top: '56px',
+        background: '#556cd6'
       },
       [theme.breakpoints.up('sm')]: {
         width: drawerWidth,
         height: 'calc(100% - 64px)',
-        top: '64px'
+        top: '64px',
+        background: 'transparent'
       }
     },
     drawerGrid: {}
@@ -54,11 +56,25 @@ const ContentDrawer: FC<ContentDrawerProps> = ({
 
   const drawer = (
     <div>
-      <Grid className={classes.drawerGrid}>
-        <NameContainer />
-        <AgeContainer />
-        <CountryContainer />
-        <GenderContainer />
+      <Grid
+        container
+        direction="column"
+        className={classes.drawerGrid}
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item>
+          <NameContainer />
+        </Grid>
+        <Grid item>
+          <AgeContainer />
+        </Grid>
+        <Grid item>
+          <GenderContainer />
+        </Grid>
+        <Grid item>
+          <CountryContainer />
+        </Grid>
       </Grid>
     </div>
   );
