@@ -31,9 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       [theme.breakpoints.up('sm')]: {
         width: drawerWidth,
-        height: 'calc(100% - 64px)',
-        top: '64px',
-        background: 'transparent'
+        height: 380,
+        top: 180,
+        borderRight: 'none',
+        background: 'rgba(119, 44, 215, 0.6)'
       }
     },
     drawerGrid: {}
