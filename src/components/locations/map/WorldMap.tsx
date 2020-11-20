@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { Feature } from 'geojson';
 import { Map, GeoJSON, TileLayer } from 'react-leaflet-universal';
 import { PayloadAction } from 'typesafe-actions';
@@ -7,11 +7,17 @@ import countries from '../../../data/geo.json';
 interface MapProps {
   data: {
     countryIds: string[] | null;
+    centroid: number[];
   };
   updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
-const WorldMap: FC<MapProps> = ({ data: { countryIds }, updateCoords }) => {
+const WorldMap: FC<MapProps> = ({
+  data: { countryIds, centroid },
+  updateCoords
+}) => {
+  const mapRef = useRef(null);
+
   const countryStyle = {
     fillColor: '#101820ff',
     fillOpacity: 0.5,
@@ -52,12 +58,20 @@ const WorldMap: FC<MapProps> = ({ data: { countryIds }, updateCoords }) => {
     updateCoords(centerCoords);
   };
 
+  useEffect(() => {
+    const map = mapRef.current.leafletElement;
+    if (map !== undefined) {
+      map.flyTo(centroid, 5);
+    }
+  }, [centroid]);
+
   return (
     <Map
+      ref={mapRef}
       center={[0, 0]}
       zoom={3}
       minZoom={2}
-      maxZoom={5}
+      maxZoom={7}
       worldCopyJump="true"
       style={{
         height: '100%',
