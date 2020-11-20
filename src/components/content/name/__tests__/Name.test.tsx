@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { LinearProgress, Typography } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import { mapStateToProps } from '../NameContainer';
 import Name from '../Name';
 import initialState from '../../../../state/initialState';
@@ -16,7 +16,7 @@ const setup = (propOverrides?: { isLoading: boolean; error: Error }) => {
   };
 
   const wrapper = shallow(<Name {...props} />);
-  const nameComponent = wrapper.find(Typography);
+  const nameComponent = wrapper.find({ children: 'John' });
   const loadingComponent = wrapper.find(LinearProgress);
   const errorComponent = wrapper.find({ children: 'Error component' });
 
