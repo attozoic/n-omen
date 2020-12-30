@@ -1,5 +1,7 @@
 import { createAction } from 'typesafe-actions';
 
+export { updateCentroid } from '../../locations/state/actions';
+
 export const GET_NAME_INFO = 'GET_NAME_INFO';
 export const GET_NAME_INFO_SUCCESS = 'GET_NAME_INFO_SUCCESS';
 export const GET_NAME_INFO_FAIL = 'GET_NAME_INFO_FAIL';

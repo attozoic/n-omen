@@ -12,11 +12,13 @@ export const mapStateToProps = ({
     nameInfo: { countryIds },
     isLoading,
     error
-  }
+  },
+  locations: { centroid }
 }: AppState): MapWrapperStateProps => {
   return {
     data: {
-      countryIds
+      countryIds,
+      centroid
     },
     isLoading,
     error

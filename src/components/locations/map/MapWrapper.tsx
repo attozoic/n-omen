@@ -8,6 +8,7 @@ export interface MapWrapperStateProps {
   error: Error | null;
   data: {
     countryIds: string[] | null;
+    centroid: number[];
   };
 }
 

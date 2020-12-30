@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { AppState } from '../../../state/initialState';
-import Country, { CountryProps } from './Country';
+import Country, { CountryStateProps } from './Country';
+import { updateCentroid } from '../state/actions';
 
 export const mapStateToProps = ({
   content: {
@@ -8,7 +10,7 @@ export const mapStateToProps = ({
     error,
     isLoading
   }
-}: AppState): CountryProps => {
+}: AppState): CountryStateProps => {
   return {
     data: {
       countries
@@ -18,6 +20,12 @@ export const mapStateToProps = ({
   };
 };
 
-const CountryContainer = connect(mapStateToProps)(Country);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    updateCentroid: (centroid: number[]) => dispatch(updateCentroid(centroid))
+  };
+};
+
+const CountryContainer = connect(mapStateToProps, mapDispatchToProps)(Country);
 
 export default CountryContainer;

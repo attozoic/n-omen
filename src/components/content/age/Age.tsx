@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { Typography, LinearProgress, withStyles } from '@material-ui/core';
+import {
+  Typography,
+  LinearProgress,
+  makeStyles,
+  createStyles
+} from '@material-ui/core';
 
 export interface AgeProps {
   isLoading: boolean;
@@ -9,32 +14,32 @@ export interface AgeProps {
   };
 }
 
-const TextTypography = withStyles({
-  root: {
-    color: '#556cd6',
-    fontSize: 25,
-    textAlign: 'center',
-    width: 210,
-    borderBottom: '1px solid',
-    backgroundColor: '#fff'
-  }
-})(Typography);
-
-const InfoTypography = withStyles({
-  root: {
-    color: '#556cd6',
-    fontSize: 8,
-    textAlign: 'center',
-    marginTop: 10,
-    backgroundColor: '#fff'
-  }
-})(Typography);
+const useStyles = makeStyles(() =>
+  createStyles({
+    ageText: {
+      color: '#556cd6',
+      fontSize: 8,
+      textAlign: 'center',
+      marginTop: 10,
+      backgroundColor: '#fff'
+    },
+    ageDataText: {
+      color: '#556cd6',
+      fontSize: 25,
+      textAlign: 'center',
+      width: 210,
+      backgroundColor: '#fff'
+    }
+  })
+);
 
 const Age: FC<AgeProps> = ({
   data: { age },
   isLoading,
   error
 }): JSX.Element => {
+  const classes = useStyles();
+
   if (isLoading) {
     return <LinearProgress />;
   }
@@ -45,10 +50,8 @@ const Age: FC<AgeProps> = ({
 
   return (
     <div>
-      <InfoTypography>AVERAGE AGE</InfoTypography>
-      <TextTypography variant="h4" color="primary">
-        {age}
-      </TextTypography>
+      <Typography className={classes.ageText}>AVERAGE AGE</Typography>
+      <Typography className={classes.ageDataText}>{age}</Typography>
     </div>
   );
 };
