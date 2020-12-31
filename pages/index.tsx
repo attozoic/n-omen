@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     mapGrid: {
       [theme.breakpoints.up('sm')]: {
         height: 'calc(100% - 64px)',
-        width: 'calc(100% - 240px)',
-        marginLeft: '240px'
+        width: '100vw'
       },
       height: `calc(100vh - 56px)`,
       position: 'relative'
