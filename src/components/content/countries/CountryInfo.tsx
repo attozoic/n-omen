@@ -181,7 +181,7 @@ const CountryInfo: FC<CountryInfoProps> = ({
                   POPULARITY
                 </Typography>
                 <Typography className={classes.popularityDataText}>
-                  {`${country.namePopularity.toFixed(4)}%`}
+                  {`${(country.namePopularity * 100).toFixed(2)}%`}
                 </Typography>
               </Grid>
             </Grid>
