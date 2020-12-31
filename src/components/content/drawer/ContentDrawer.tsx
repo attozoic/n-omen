@@ -14,7 +14,7 @@ import AgeContainer from '../age/AgeContainer';
 import CountryContainer from '../countries/CountryContainer';
 import GenderContainer from '../gender/GenderContainer';
 
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

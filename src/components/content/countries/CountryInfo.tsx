@@ -23,24 +23,24 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     countryGrid: {
-      width: 210,
+      width: 240,
       height: 40
     },
     countryNameProp: {
-      width: 150,
+      width: 170,
       height: 40,
       textAlign: 'left',
       justifyItems: 'center'
     },
     namePopularityProp: {
-      width: 60,
+      width: 70,
       height: 40,
       textAlign: 'right',
       justifyItems: 'center'
     },
     countryDataText: {
       color: '#fff',
-      fontSize: 12,
+      fontSize: 14,
       borderBottom: '1px solid',
       [theme.breakpoints.up('sm')]: {
         '&:hover': {
@@ -50,22 +50,9 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       }
     },
-    countryText: {
-      color: '#fff',
-      fontSize: 8,
-      background:
-        'linear-gradient(90deg, rgba(239,239,241,1) 0%, rgba(25,42,124,1) 0%, rgba(85,108,214,1) 100%)',
-      paddingLeft: 2,
-      paddingTop: 1
-    },
-    popularityText: {
-      color: '#f5f5f5',
-      fontSize: 8,
-      paddingTop: 1
-    },
     popularityDataText: {
       color: '#fff',
-      fontSize: 12,
+      fontSize: 14,
       borderBottom: '1px solid'
     }
   })
@@ -164,9 +151,6 @@ const CountryInfo: FC<CountryInfoProps> = ({
               direction="row"
             >
               <Grid className={classes.countryNameProp}>
-                <Typography className={classes.countryText}>
-                  {i + 1}. COUNTRY
-                </Typography>
                 <Typography
                   onClick={() => {
                     getCentroid(i);
@@ -177,9 +161,6 @@ const CountryInfo: FC<CountryInfoProps> = ({
                 </Typography>
               </Grid>
               <Grid className={classes.namePopularityProp}>
-                <Typography className={classes.popularityText}>
-                  POPULARITY
-                </Typography>
                 <Typography className={classes.popularityDataText}>
                   {`${(country.namePopularity * 100).toFixed(2)}%`}
                 </Typography>
