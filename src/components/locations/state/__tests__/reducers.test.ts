@@ -1,6 +1,6 @@
 import reducer from '../reducers';
 import initialState from '../initialState';
-import { UPDATE_COORDS } from '../actions';
+import { UPDATE_COORDS, UPDATE_CENTROID, GET_NAME_INFO_FAIL } from '../actions';
 
 describe('Locations reducer', () => {
   it('should return initialState', () => {
@@ -13,6 +13,21 @@ describe('Locations reducer', () => {
     ).toEqual({
       ...initialState,
       coords: [25, 25]
+    });
+  });
+
+  it('should handle UPDATE_CENTROID action', () => {
+    expect(
+      reducer(initialState, { type: UPDATE_CENTROID, payload: [25, 25] })
+    ).toEqual({
+      ...initialState,
+      centroid: [25, 25]
+    });
+  });
+
+  it('should handle GET_NAME_INFO_FAIL action', () => {
+    expect(reducer(initialState, { type: GET_NAME_INFO_FAIL })).toEqual({
+      ...initialState
     });
   });
 });
