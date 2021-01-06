@@ -12,11 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-
-export interface SearchProps {
-  getNameInfo: () => void;
-  toggleMobileOpen: () => void;
-}
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,17 +20,19 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     appBar: {
-      minHeight: '56px',
+      minHeight: 56,
       justifyContent: 'center',
+      boxShadow: 'none',
       [theme.breakpoints.up('xs')]: {
-        height: '56px'
+        height: 56
       },
       [theme.breakpoints.up('sm')]: {
-        height: '64px'
+        height: 64
       }
     },
     menuButton: {
       marginRight: theme.spacing(2),
+      color: 'white',
       [theme.breakpoints.up('sm')]: {
         display: 'none'
       }
@@ -42,19 +40,22 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
       display: 'none',
+      color: 'white',
       [theme.breakpoints.up('sm')]: {
         display: 'block'
       }
     },
     search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
+      [theme.breakpoints.up('xs')]: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+          backgroundColor: fade(theme.palette.common.white, 0.25)
+        },
+        marginLeft: 0,
+        width: '100%'
       },
-      marginLeft: 0,
-      width: '100%',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
         width: 'auto'
@@ -67,36 +68,64 @@ const useStyles = makeStyles((theme: Theme) =>
       pointerEvents: 'none',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      color: 'white'
     },
     inputRoot: {
-      color: 'inherit'
+      color: 'white'
     },
     inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
+      [theme.breakpoints.up('xs')]: {
+        padding: theme.spacing(1, 1, 1, 0),
+        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        transition: theme.transitions.create('width'),
+        width: '100%'
+      },
       [theme.breakpoints.up('sm')]: {
-        width: '12ch',
+        border: '1px white solid',
+        width: '24ch',
         '&:focus': {
-          width: '20ch'
+          width: '27ch',
+          color: 'white'
         }
       }
+    },
+    spinner: {
+      color: 'white'
     }
   })
 );
 
+export interface SearchDispatchProps {
+  getNameInfo: () => void;
+  toggleMobileOpen: () => void;
+}
+
+export interface SearchStateProps {
+  isLoading: boolean;
+}
+
+type SearchProps = SearchStateProps & SearchDispatchProps;
+
 const Search: FC<SearchProps> = ({
   getNameInfo,
-  toggleMobileOpen
+  toggleMobileOpen,
+  isLoading
 }): JSX.Element => {
   const classes = useStyles();
 
   const handleKeyDown = (event: { key: string }) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !isLoading) {
       getNameInfo();
     }
+  };
+
+  const loadingSpinner = () => {
+    if (isLoading) {
+      return <CircularProgress size={20} className={classes.spinner} />;
+    }
+
+    return <SearchIcon />;
   };
 
   return (
@@ -113,13 +142,12 @@ const Search: FC<SearchProps> = ({
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            N-omen
+            N-OMEN
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+            <div className={classes.searchIcon}>{loadingSpinner()}</div>
             <InputBase
+              autoComplete="off"
               onKeyDown={handleKeyDown}
               id="search-input"
               placeholder="Search…"
