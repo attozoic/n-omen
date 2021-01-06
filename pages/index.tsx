@@ -12,12 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: '100vh',
-      background: '#7FFFD4'
+      background:
+        'linear-gradient(180deg, rgba(19,15,64,1) 25%, rgba(66,62,102,1) 100%)'
     },
     mapGrid: {
       [theme.breakpoints.up('sm')]: {
         height: 'calc(100% - 64px)',
-        width: '100vw'
+        width: 'calc(100vw - 290px)',
+        marginLeft: 290
       },
       height: `calc(100vh - 56px)`,
       position: 'relative'
