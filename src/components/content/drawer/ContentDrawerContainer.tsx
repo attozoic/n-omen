@@ -1,14 +1,20 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Drawer from './ContentDrawer';
+import ContentDrawer from './ContentDrawer';
 import { TOGGLE_MOBILE_OPEN } from '../state/actions';
 import { AppState } from '../../../state/initialState';
 
 export const mapStateToProps = ({
-  content: { mobileOpen }
-}: AppState): { mobileOpen: boolean } => {
+  content: { mobileOpen, haveContent, isLoading }
+}: AppState): {
+  mobileOpen: boolean;
+  haveContent: boolean;
+  isLoading: boolean;
+} => {
   return {
-    mobileOpen
+    mobileOpen,
+    haveContent,
+    isLoading
   };
 };
 
@@ -20,5 +26,8 @@ export const mapDispatchToProps = (
   };
 };
 
-const DrawerContainer = connect(mapStateToProps, mapDispatchToProps)(Drawer);
+const DrawerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContentDrawer);
 export default DrawerContainer;
