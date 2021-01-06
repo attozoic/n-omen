@@ -2,19 +2,15 @@ import React, { FC } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import { Grid } from '@material-ui/core';
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles
 } from '@material-ui/core/styles';
-import NameContainer from '../name/NameContainer';
-import AgeContainer from '../age/AgeContainer';
-import CountryContainer from '../countries/CountryContainer';
-import GenderContainer from '../gender/GenderContainer';
-
-const drawerWidth = 270;
+import Content from './Content';
+import InstructionsContainer from '../../help/InstructionsContainer';
+import LoadingIndicator from '../../help/LoadingIndicator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,61 +20,51 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       [theme.breakpoints.up('xs')]: {
-        width: drawerWidth,
+        width: '240px',
         height: 'calc(100% - 56px)',
         top: '56px',
-        background: '#556cd6'
+        background: '#484848'
       },
       [theme.breakpoints.up('sm')]: {
-        width: drawerWidth,
-        height: 380,
-        top: 180,
-        borderRight: 'none',
-        background: 'rgba(119, 44, 215, 0.6)'
+        width: '290px',
+        height: 'calc(100% - 64px)',
+        top: '64px',
+        background: '#484848',
+        borderRight: 'none'
       }
-    },
-    drawerGrid: {}
+    }
   })
 );
 
 interface ContentDrawerProps {
   window?: () => Window;
   mobileOpen: boolean;
+  isLoading: boolean;
+  haveContent: boolean;
   toggleMobileOpen: () => void;
 }
 
 const ContentDrawer: FC<ContentDrawerProps> = ({
   window,
   mobileOpen,
+  haveContent,
+  isLoading,
   toggleMobileOpen
 }): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const drawer = (
-    <div>
-      <Grid
-        container
-        direction="column"
-        className={classes.drawerGrid}
-        alignItems="center"
-        justify="center"
-      >
-        <Grid item>
-          <NameContainer />
-        </Grid>
-        <Grid item>
-          <AgeContainer />
-        </Grid>
-        <Grid item>
-          <GenderContainer />
-        </Grid>
-        <Grid item>
-          <CountryContainer />
-        </Grid>
-      </Grid>
-    </div>
-  );
+  const showCorrectInfo = () => {
+    if (isLoading) {
+      return <LoadingIndicator />;
+    }
+
+    if (haveContent) {
+      return <Content />;
+    }
+
+    return <InstructionsContainer />;
+  };
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -100,18 +86,19 @@ const ContentDrawer: FC<ContentDrawerProps> = ({
             keepMounted: true
           }}
         >
-          {drawer}
+          {showCorrectInfo()}
         </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
         <Drawer
+          anchor="bottom"
           classes={{
             paper: classes.drawerPaper
           }}
           variant="permanent"
           open
         >
-          {drawer}
+          {showCorrectInfo()}
         </Drawer>
       </Hidden>
     </div>
