@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-export { updateCentroid } from '../../locations/state/actions';
+export { updateCentroid, updateCoords } from '../../locations/state/actions';
 
 export const GET_NAME_INFO = 'GET_NAME_INFO';
 export const GET_NAME_INFO_SUCCESS = 'GET_NAME_INFO_SUCCESS';
@@ -13,4 +13,7 @@ export const getNameInfoSuccess = createAction(
   GET_NAME_INFO_SUCCESS,
   (data) => data
 )();
-export const getNameInfoFail = createAction(GET_NAME_INFO_FAIL)<Error>();
+export const getNameInfoFail = createAction(
+  GET_NAME_INFO_FAIL,
+  (error) => error
+)();
