@@ -19,22 +19,23 @@ describe('Content reducers', () => {
       })
     ).toEqual({
       ...initialState,
-      isLoading: true
+      isLoading: true,
+      firstSearchDone: true
     }));
 
   it('should handle GET_NAME_INFO_FAIL', () =>
     expect(
       reducer(initialState, {
         type: GET_NAME_INFO_FAIL,
-        Error
+        payload: {
+          Error
+        }
       })
     ).toEqual({
       ...initialState,
+      firstSearchDone: true,
       isLoading: false,
-      error: {
-        Error,
-        type: GET_NAME_INFO_FAIL
-      }
+      error: { Error }
     }));
 
   it('should handle GET_NAME_INFO_SUCCESS', () =>
@@ -47,7 +48,10 @@ describe('Content reducers', () => {
           countryIds: ['RS', 'HR', 'DE'],
           maleShare: 22,
           name: 'John'
-        }
+        },
+        haveContent: true,
+        isLoading: false,
+        error: null
       })
     ).toEqual({
       ...initialState,
@@ -58,7 +62,9 @@ describe('Content reducers', () => {
         countryIds: ['RS', 'HR', 'DE'],
         maleShare: 22,
         name: 'John'
-      }
+      },
+      haveContent: true,
+      error: null
     }));
 
   it('should handle TOGGLE_MOBILE_OPEN', () =>
