@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   Typography,
   Grid,
@@ -15,34 +15,66 @@ const useStyles = makeStyles((theme: Theme) =>
     countriesGrid: {
       [theme.breakpoints.up('xs')]: {
         width: 240,
-        height: 140
+        height: '110px'
       },
       [theme.breakpoints.up('sm')]: {
-        width: 240,
-        height: 120
+        width: 290,
+        height: 'auto'
+      }
+    },
+    countryContainer: {
+      [theme.breakpoints.up('xs')]: {
+        color: 'white',
+        fontSize: '17px',
+        textAlign: 'center',
+        marginTop: '10px',
+        width: 200
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 270
       }
     },
     countryGrid: {
-      width: 240,
-      height: 40
+      [theme.breakpoints.up('xs')]: {
+        width: 200,
+        height: 30
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 250,
+        marginBottom: 3,
+        height: 40
+      }
     },
     countryNameProp: {
-      width: 170,
-      height: 40,
-      textAlign: 'left',
-      justifyItems: 'center'
+      [theme.breakpoints.up('xs')]: {
+        width: 140,
+        textAlign: 'left',
+        justifyItems: 'center'
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 185,
+        height: 40
+      }
     },
     namePopularityProp: {
-      width: 70,
-      height: 40,
-      textAlign: 'right',
-      justifyItems: 'center'
+      [theme.breakpoints.up('xs')]: {
+        width: 60,
+        textAlign: 'right',
+        justifyItems: 'center'
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 65,
+        height: 40
+      }
     },
     countryDataText: {
-      color: '#fff',
-      fontSize: 14,
-      borderBottom: '1px solid',
+      [theme.breakpoints.up('xs')]: {
+        fontSize: 12,
+        color: '#fff',
+        borderBottom: '1px solid'
+      },
       [theme.breakpoints.up('sm')]: {
+        fontSize: 14,
         '&:hover': {
           paddingLeft: 4,
           transition: '0.3s',
@@ -50,10 +82,52 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       }
     },
+    countryText: {
+      [theme.breakpoints.up('xs')]: {
+        color: '#fff',
+        fontSize: 8,
+        background:
+          'linear-gradient(90deg, rgba(10,191,64,1) 0%, rgba(72,72,72,1) 100%)',
+        paddingLeft: 2,
+        paddingTop: 1
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 10
+      }
+    },
+    popularityText: {
+      [theme.breakpoints.up('xs')]: {
+        color: '#f5f5f5',
+        fontSize: 8,
+        paddingTop: 1
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 10
+      }
+    },
     popularityDataText: {
-      color: '#fff',
-      fontSize: 14,
-      borderBottom: '1px solid'
+      [theme.breakpoints.up('xs')]: {
+        color: '#fff',
+        fontSize: 12,
+        borderBottom: '1px solid'
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 14
+      }
+    },
+    countriesInfo: {
+      [theme.breakpoints.up('xs')]: {
+        color: 'white',
+        fontSize: 13,
+        textAlign: 'center',
+        width: 240,
+        marginBottom: 3
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 14,
+        width: 290,
+        marginTop: 20
+      }
     }
   })
 );
@@ -61,19 +135,22 @@ const useStyles = makeStyles((theme: Theme) =>
 interface CountryInfoProps {
   data: {
     countries: CountryData[];
+    haveContent: boolean;
   };
   updateCentroid: (
     centroid: number[]
   ) => PayloadAction<'UPDATE_CENTROID', number[]>;
+  updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
 const CountryInfo: FC<CountryInfoProps> = ({
-  data: { countries },
-  updateCentroid
+  data: { countries, haveContent },
+  updateCentroid,
+  updateCoords
 }): JSX.Element => {
   const classes = useStyles();
 
-  const getCentroid = (index) => {
+  const getCentroid = (index: number) => {
     const chosenId = countries[index].countryName;
     let chosenCoordinates;
 
@@ -130,10 +207,18 @@ const CountryInfo: FC<CountryInfoProps> = ({
     const x = (minX + maxX) / 2;
     const y = (minY + maxY) / 2;
     updateCentroid([y, x]);
+    updateCoords([y, x]);
   };
+
+  useEffect(() => {
+    getCentroid(0);
+  }, [haveContent]);
 
   return (
     <div>
+      <Typography className={classes.countriesInfo}>
+        Countries this name is popular in:
+      </Typography>
       <Grid
         container
         direction="column"
@@ -151,6 +236,9 @@ const CountryInfo: FC<CountryInfoProps> = ({
               direction="row"
             >
               <Grid className={classes.countryNameProp}>
+                <Typography className={classes.countryText}>
+                  {i + 1}. COUNTRY
+                </Typography>
                 <Typography
                   onClick={() => {
                     getCentroid(i);
@@ -161,6 +249,9 @@ const CountryInfo: FC<CountryInfoProps> = ({
                 </Typography>
               </Grid>
               <Grid className={classes.namePopularityProp}>
+                <Typography className={classes.popularityText}>
+                  POPULARITY
+                </Typography>
                 <Typography className={classes.popularityDataText}>
                   {`${(country.namePopularity * 100).toFixed(2)}%`}
                 </Typography>
