@@ -1,57 +1,58 @@
 import React, { FC } from 'react';
-import {
-  Typography,
-  LinearProgress,
-  makeStyles,
-  createStyles
-} from '@material-ui/core';
+import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
 
-export interface AgeProps {
-  isLoading: boolean;
-  error: Error | null;
-  data: {
-    age: number | null;
-  };
-}
-
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    ageText: {
-      color: '#556cd6',
-      fontSize: 8,
-      textAlign: 'center',
-      marginTop: 10,
-      backgroundColor: '#fff'
+    ageContainter: {
+      textAlign: 'center'
     },
-    ageDataText: {
-      color: '#556cd6',
-      fontSize: 25,
-      textAlign: 'center',
-      width: 210,
-      backgroundColor: '#fff'
+    didYouKnowText: {
+      [theme.breakpoints.up('xs')]: {
+        color: '#0abf40',
+        fontSize: 16,
+        fontStyle: 'italic',
+        marginTop: 15
+      },
+      [theme.breakpoints.up('sm')]: {
+        color: '#0abf40',
+        fontSize: 20,
+        fontStyle: 'italic',
+        marginTop: 50
+      }
+    },
+    ageText: {
+      [theme.breakpoints.up('xs')]: {
+        color: '#E8E8E8',
+        fontSize: 14,
+        textAlign: 'center',
+        fontStyle: 'italic',
+        paddingBottom: 10
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 17
+      }
     }
   })
 );
 
-const Age: FC<AgeProps> = ({
-  data: { age },
-  isLoading,
-  error
-}): JSX.Element => {
+export interface AgeProps {
+  data: {
+    age: number | null;
+    name: string;
+  };
+}
+
+const Age: FC<AgeProps> = ({ data: { age, name } }): JSX.Element => {
   const classes = useStyles();
 
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  if (error != null) {
-    return <div>Error component</div>;
-  }
-
   return (
-    <div>
-      <Typography className={classes.ageText}>AVERAGE AGE</Typography>
-      <Typography className={classes.ageDataText}>{age}</Typography>
+    <div className={classes.ageContainter}>
+      <Typography className={classes.didYouKnowText}>Did you know:</Typography>
+      <Typography className={classes.ageText}>
+        People named {name} have
+        <br />
+        an average age of {age}.
+      </Typography>
     </div>
   );
 };
