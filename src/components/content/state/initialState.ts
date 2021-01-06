@@ -1,8 +1,10 @@
 import { ContentState } from './types';
 
 const initialState: ContentState = {
-  isLoading: true,
+  isLoading: false,
   mobileOpen: false,
+  firstSearchDone: false,
+  haveContent: false,
   error: null,
   nameInfo: {
     name: null,
