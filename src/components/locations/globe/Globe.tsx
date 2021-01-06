@@ -29,16 +29,16 @@ const Globe: FC<GlobeProps> = ({ data: { coords } }) => {
       .append('path')
       .datum({ type: 'Sphere' })
       .attr('d', path)
-      .attr('fill', '#101820ff');
+      .attr('fill', 'rgba(71, 71, 71, 0.6)');
 
     map
       .selectAll('.country')
       .data(json.features)
       .join('path')
       .attr('class', 'country')
-      .attr('fill', '#f3b059');
+      .attr('fill', '#0abf40');
 
-    map.selectAll('.country').attr('d', path).attr('stroke', 'black');
+    map.selectAll('.country').attr('d', path);
     svg.selectAll('*').attr('pointer-events', 'none');
   };
 
