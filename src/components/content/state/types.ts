@@ -5,6 +5,8 @@ export interface ContentState {
   mobileOpen: boolean;
   error: Error;
   nameInfo: NameInfo;
+  firstSearchDone: boolean;
+  haveContent: boolean;
 }
 
 export interface NameInfo {
