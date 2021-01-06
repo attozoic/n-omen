@@ -6,6 +6,7 @@ import { getNameInfo, toggleMobileOpen } from '../../content/state/actions';
 
 const setup = () => {
   const props = {
+    isLoading: false,
     getNameInfo,
     toggleMobileOpen
   };
