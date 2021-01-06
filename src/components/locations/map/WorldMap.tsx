@@ -8,20 +8,21 @@ interface MapProps {
   data: {
     countryIds: string[] | null;
     centroid: number[];
+    haveContent: boolean;
   };
   updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
 const WorldMap: FC<MapProps> = ({
-  data: { countryIds, centroid },
+  data: { countryIds, centroid, haveContent },
   updateCoords
 }) => {
   const mapRef = useRef(null);
 
   const countryStyle = {
-    fillColor: '#101820ff',
+    fillColor: '#0abf40',
     fillOpacity: 0.5,
-    color: 'blue',
+    color: '#484848',
     weight: 1
   };
 
@@ -60,15 +61,17 @@ const WorldMap: FC<MapProps> = ({
 
   useEffect(() => {
     const map = mapRef.current.leafletElement;
+    const zoom = haveContent ? 5 : 3;
+
     if (map !== undefined) {
-      map.flyTo(centroid, 5);
+      map.flyTo(centroid, zoom);
     }
   }, [centroid]);
 
   return (
     <Map
       ref={mapRef}
-      center={[0, 0]}
+      center={[20, 0]}
       zoom={3}
       minZoom={2}
       maxZoom={7}
