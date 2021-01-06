@@ -4,17 +4,14 @@ import Age, { AgeProps } from './Age';
 
 export const mapStateToProps = ({
   content: {
-    nameInfo: { age },
-    error,
-    isLoading
+    nameInfo: { age, name }
   }
 }: AppState): AgeProps => {
   return {
     data: {
-      age
-    },
-    isLoading,
-    error
+      age,
+      name
+    }
   };
 };
 
