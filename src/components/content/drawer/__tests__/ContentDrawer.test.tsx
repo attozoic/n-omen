@@ -1,17 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Drawer, Hidden } from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
 import ContentDrawer from '../ContentDrawer';
 import { toggleMobileOpen } from '../../state/actions';
-import CountryContainer from '../../countries/CountryContainer';
-import AgeContainer from '../../age/AgeContainer';
-import NameContainer from '../../name/NameContainer';
-import GenderContainer from '../../gender/GenderContainer';
 import { mapDispatchToProps, mapStateToProps } from '../ContentDrawerContainer';
 import initialState from '../../../../state/initialState';
+import Content from '../Content';
+import InstructionsContainer from '../../../help/InstructionsContainer';
+import LoadingIndicator from '../../../help/LoadingIndicator';
 
-const setup = (propOverrides?: { mobileOpen: boolean }) => {
+const setup = (propOverrides?: {
+  haveContent: boolean;
+  isLoading: boolean;
+}) => {
   const props = {
+    isLoading: false,
+    haveContent: false,
     mobileOpen: false,
     toggleMobileOpen,
     ...propOverrides
@@ -22,9 +26,6 @@ const setup = (propOverrides?: { mobileOpen: boolean }) => {
   const permanentDrawer = wrapper.find(Drawer).filterWhere((item) => {
     return item.prop('variant') === 'permanent';
   });
-  const permanentHiddenContainer = wrapper.find(Hidden).filterWhere((item) => {
-    return item.prop('xsDown');
-  });
 
   const temporaryDrawer = wrapper.find(Drawer).filterWhere((item) => {
     return item.prop('variant') === 'temporary';
@@ -33,7 +34,6 @@ const setup = (propOverrides?: { mobileOpen: boolean }) => {
   return {
     wrapper,
     permanentDrawer,
-    permanentHiddenContainer,
     temporaryDrawer
   };
 };
@@ -48,15 +48,36 @@ describe('ContentDrawer component', () => {
     it('should render', () => {
       const { permanentDrawer } = setup();
       expect(permanentDrawer.exists()).toBe(true);
-      expect(permanentDrawer.length).toBe(1);
     });
 
-    it('should render content components', () => {
-      const { permanentDrawer } = setup();
-      expect(permanentDrawer.find(AgeContainer).exists()).toBe(true);
-      expect(permanentDrawer.find(CountryContainer).exists()).toBe(true);
-      expect(permanentDrawer.find(GenderContainer).exists()).toBe(true);
-      expect(permanentDrawer.find(NameContainer).exists()).toBe(true);
+    it('should render only content component if haveContent is true', () => {
+      const { permanentDrawer } = setup({
+        haveContent: true,
+        isLoading: false
+      });
+      expect(permanentDrawer.find(Content).exists()).toBe(true);
+      expect(permanentDrawer.find(InstructionsContainer).exists()).toBe(false);
+      expect(permanentDrawer.find(LoadingIndicator).exists()).toBe(false);
+    });
+
+    it('should render only instructions component if haveContent is false', () => {
+      const { permanentDrawer } = setup({
+        haveContent: false,
+        isLoading: false
+      });
+      expect(permanentDrawer.find(InstructionsContainer).exists()).toBe(true);
+      expect(permanentDrawer.find(LoadingIndicator).exists()).toBe(false);
+      expect(permanentDrawer.find(Content).exists()).toBe(false);
+    });
+
+    it('should render only loading indicator component if isLoading is true', () => {
+      const { permanentDrawer } = setup({
+        haveContent: true,
+        isLoading: true
+      });
+      expect(permanentDrawer.find(LoadingIndicator).exists()).toBe(true);
+      expect(permanentDrawer.find(InstructionsContainer).exists()).toBe(false);
+      expect(permanentDrawer.find(Content).exists()).toBe(false);
     });
   });
 
@@ -64,15 +85,36 @@ describe('ContentDrawer component', () => {
     it('should render', () => {
       const { temporaryDrawer } = setup();
       expect(temporaryDrawer.exists()).toBe(true);
-      expect(temporaryDrawer.length).toBe(1);
     });
 
-    it('should render content components', () => {
-      const { temporaryDrawer } = setup();
-      expect(temporaryDrawer.find(AgeContainer).exists()).toBe(true);
-      expect(temporaryDrawer.find(CountryContainer).exists()).toBe(true);
-      expect(temporaryDrawer.find(GenderContainer).exists()).toBe(true);
-      expect(temporaryDrawer.find(NameContainer).exists()).toBe(true);
+    it('should render only content component if haveContent is true', () => {
+      const { temporaryDrawer } = setup({
+        haveContent: true,
+        isLoading: false
+      });
+      expect(temporaryDrawer.find(Content).exists()).toBe(true);
+      expect(temporaryDrawer.find(InstructionsContainer).exists()).toBe(false);
+      expect(temporaryDrawer.find(LoadingIndicator).exists()).toBe(false);
+    });
+
+    it('should render only instructions component if haveContent is false', () => {
+      const { temporaryDrawer } = setup({
+        haveContent: false,
+        isLoading: false
+      });
+      expect(temporaryDrawer.find(InstructionsContainer).exists()).toBe(true);
+      expect(temporaryDrawer.find(LoadingIndicator).exists()).toBe(false);
+      expect(temporaryDrawer.find(Content).exists()).toBe(false);
+    });
+
+    it('should render only loading indicator component if isLoading is true', () => {
+      const { temporaryDrawer } = setup({
+        haveContent: true,
+        isLoading: true
+      });
+      expect(temporaryDrawer.find(LoadingIndicator).exists()).toBe(true);
+      expect(temporaryDrawer.find(InstructionsContainer).exists()).toBe(false);
+      expect(temporaryDrawer.find(Content).exists()).toBe(false);
     });
   });
 
@@ -82,11 +124,13 @@ describe('ContentDrawer component', () => {
         ...initialState,
         content: {
           ...initialState.content,
-          mobileOpen: true
+          mobileOpen: true,
+          haveContent: true
         }
       };
 
       expect(mapStateToProps(testInitialState).mobileOpen).toBe(true);
+      expect(mapStateToProps(testInitialState).haveContent).toBe(true);
     });
   });
 
