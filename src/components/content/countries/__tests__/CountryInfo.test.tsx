@@ -1,21 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CountryInfo from '../CountryInfo';
+import { updateCentroid, updateCoords } from '../../state/actions';
 import { CountryData } from '../types';
-import { updateCentroid } from '../../state/actions';
 
-const setup = (propsOverride?: { data: { countries: CountryData[] } }) => {
+const setup = (propOverrides?: { countries: CountryData[] }) => {
   const props = {
     data: {
-      countries: [
-        {
-          countryName: 'Serbia',
-          namePopularity: 0.88823
-        }
-      ]
+      countries: [{ countryName: 'Serbia', namePopularity: 0.8237 }],
+      haveContent: true,
+      ...propOverrides
     },
     updateCentroid,
-    ...propsOverride
+    updateCoords
   };
 
   const wrapper = shallow(<CountryInfo {...props} />);
@@ -41,7 +38,7 @@ describe('CountryInfo component', () => {
           namePopularity: 0.98382
         }
       ];
-      const { wrapper } = setup({ data: { countries } });
+      const { wrapper } = setup({ countries });
       expect(wrapper.find({ children: 'Serbia' }).exists()).toBe(true);
       expect(wrapper.find({ children: 'Russia' }).exists()).toBe(true);
     });
