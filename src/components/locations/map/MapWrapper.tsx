@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
-import { LinearProgress } from '@material-ui/core';
 import { PayloadAction } from 'typesafe-actions';
 import WorldMap from './WorldMap';
 
 export interface MapWrapperStateProps {
-  isLoading: boolean | null;
   error: Error | null;
   data: {
     countryIds: string[] | null;
     centroid: number[];
+    haveContent: boolean;
   };
 }
 
@@ -18,20 +17,7 @@ export interface MapWrapperDispatchProps {
 
 type MapWrapperProps = MapWrapperStateProps & MapWrapperDispatchProps;
 
-const MapWrapper: FC<MapWrapperProps> = ({
-  data,
-  isLoading,
-  error,
-  updateCoords
-}) => {
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  if (error != null) {
-    return <div>Error component</div>;
-  }
-
+const MapWrapper: FC<MapWrapperProps> = ({ data, updateCoords }) => {
   return <WorldMap data={data} updateCoords={updateCoords} />;
 };
 
