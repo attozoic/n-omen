@@ -1,5 +1,27 @@
 import * as d3 from 'd3';
 import React, { FC, useEffect } from 'react';
+import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    genderText: {
+      [theme.breakpoints.up('xs')]: {
+        color: 'white',
+        width: 240,
+        fontSize: 13,
+        marginTop: 5
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 290,
+        fontSize: 15,
+        marginTop: 20
+      }
+    },
+    genderContainer: {
+      textAlign: 'center'
+    }
+  })
+);
 
 interface DonutChartProps {
   data: {
@@ -10,7 +32,17 @@ interface DonutChartProps {
 const DonutChart: FC<DonutChartProps> = ({
   data: { maleShare }
 }): JSX.Element => {
+  const classes = useStyles();
   const femaleShare = 100 - maleShare;
+  let genderInfo: string;
+
+  if (maleShare > femaleShare) {
+    genderInfo = 'This is mostly a male name.';
+  } else if (femaleShare > maleShare) {
+    genderInfo = 'This is mostly a female name.';
+  } else {
+    genderInfo = 'This name is equally popular among both genders.';
+  }
 
   const createDonutChart = () => {
     const genderData = [
@@ -124,7 +156,12 @@ const DonutChart: FC<DonutChartProps> = ({
     createDonutChart();
   }, [maleShare]);
 
-  return <svg className="donut-svg" />;
+  return (
+    <div className={classes.genderContainer}>
+      <Typography className={classes.genderText}>{genderInfo}</Typography>
+      <svg className="donut-svg" />
+    </div>
+  );
 };
 
 export default DonutChart;
