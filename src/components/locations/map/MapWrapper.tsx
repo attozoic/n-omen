@@ -3,7 +3,6 @@ import { PayloadAction } from 'typesafe-actions';
 import WorldMap from './WorldMap';
 
 export interface MapWrapperStateProps {
-  error: Error | null;
   data: {
     countryIds: string[] | null;
     centroid: number[];
