@@ -7,7 +7,8 @@ const setup = () => {
   const props = {
     data: {
       countryIds: ['RS', 'HR'],
-      coords: [0, 0]
+      centroid: [1, 1],
+      haveContent: false
     },
     updateCoords
   };
