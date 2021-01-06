@@ -11,15 +11,17 @@ export default createReducer(initialState, {
   [GET_NAME_INFO]: (state) => ({
     ...state,
     isLoading: true,
-    error: null
+    firstSearchDone: true,
+    error: null,
+    haveContent: false
   }),
   [TOGGLE_MOBILE_OPEN]: (state) => ({
     ...state,
     mobileOpen: !state.mobileOpen
   }),
-  [GET_NAME_INFO_FAIL]: (state, payload) => ({
-    ...state,
-    isLoading: false,
+  [GET_NAME_INFO_FAIL]: (state, { payload }) => ({
+    ...initialState,
+    firstSearchDone: true,
     error: payload
   }),
   [GET_NAME_INFO_SUCCESS]: (state, { payload }) => ({
@@ -27,6 +29,7 @@ export default createReducer(initialState, {
     nameInfo: {
       ...payload
     },
+    haveContent: true,
     isLoading: false,
     error: null
   })
