@@ -4,15 +4,11 @@ import Gender, { GenderProps } from './Gender';
 
 export const mapStateToProps = ({
   content: {
-    nameInfo: { maleShare },
-    isLoading,
-    error
+    nameInfo: { maleShare }
   }
 }: AppState): GenderProps => {
   return {
-    data: { maleShare },
-    isLoading,
-    error
+    data: { maleShare }
   };
 };
 
