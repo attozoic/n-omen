@@ -1,14 +1,12 @@
 import React, { FC } from 'react';
-import { LinearProgress } from '@material-ui/core';
 import { PayloadAction } from 'typesafe-actions';
 import CountryInfo from './CountryInfo';
 import { CountryData } from './types';
 
 export interface CountryStateProps {
-  isLoading: boolean;
-  error: Error | null;
   data: {
     countries: CountryData[];
+    haveContent: boolean;
   };
 }
 
@@ -16,25 +14,23 @@ interface CountryDispatchProps {
   updateCentroid: (
     centroid: number[]
   ) => PayloadAction<'UPDATE_CENTROID', number[]>;
+  updateCoords: (coords: number[]) => PayloadAction<'UPDATE_COORDS', number[]>;
 }
 
 type CountryProps = CountryStateProps & CountryDispatchProps;
 
 const Country: FC<CountryProps> = ({
   data,
-  error,
-  isLoading,
-  updateCentroid
+  updateCentroid,
+  updateCoords
 }): JSX.Element => {
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  if (error != null) {
-    return <div>Error component</div>;
-  }
-
-  return <CountryInfo data={data} updateCentroid={updateCentroid} />;
+  return (
+    <CountryInfo
+      data={data}
+      updateCentroid={updateCentroid}
+      updateCoords={updateCoords}
+    />
+  );
 };
 
 export default Country;
