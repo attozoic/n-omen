@@ -10,18 +10,16 @@ import { updateCoords } from '../state/actions';
 export const mapStateToProps = ({
   content: {
     nameInfo: { countryIds },
-    isLoading,
-    error
+    haveContent
   },
   locations: { centroid }
 }: AppState): MapWrapperStateProps => {
   return {
     data: {
       countryIds,
-      centroid
-    },
-    isLoading,
-    error
+      centroid,
+      haveContent
+    }
   };
 };
 
