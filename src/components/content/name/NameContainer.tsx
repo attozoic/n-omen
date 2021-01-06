@@ -4,15 +4,11 @@ import Name, { NameProps } from './Name';
 
 export const mapStateToProps = ({
   content: {
-    nameInfo: { name },
-    isLoading,
-    error
+    nameInfo: { name }
   }
 }: AppState): NameProps => {
   return {
-    data: { name },
-    isLoading,
-    error
+    data: { name }
   };
 };
 
